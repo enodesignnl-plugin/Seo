@@ -66,10 +66,13 @@ Het Afghaanse karakter zit zo in de lijn zelf, zonder bogen, sterren of pseudo-A
 
 **Secundair teken: de saffraandraden**
 - Het teken toont de drie stempels van de saffraankrokus, de draden die de specerij zijn. Saffraan uit Herat is een bekend Afghaans product.
-- Elke draad is één pennenstreek: haarlijn aan de voet, open naar de top, die eindigt in de schuine snede van de pen.
-- Door de vaste penhoek krijgen de drie draden vanzelf verschillend gewicht.
-- De draden staan bewust asymmetrisch, zodat het teken niet als Ψ (psi) of drietand leest.
-- In de lockup gebruiken we een lichte versie met steeltje, ongeveer half zo hoog als de kaphoogte.
+- Elke draad is één pennenstreek met dezelfde penhoek als de R:
+  - over het grootste deel een haarlijn, die in een trage S-bocht omhoog loopt;
+  - bovenaan opent de draad zich tot het trompetje van de stempel;
+  - het open uiteinde is als een ondiep kommetje uitgesneden, zoals een echte saffraandraad eindigt.
+- Door de vaste penhoek krijgen de drie draden vanzelf verschillend gewicht. Ze staan bewust asymmetrisch.
+- Eerste versie (vervangen): rechte wiggen met een schuine snede. Die lazen als Ψ, drietand of veren in plaats van saffraan.
+- In de lockup gebruiken we een lichte versie met steeltje.
 - Als losstaand merk (`direction-a-monogram.svg`) gebruiken we een zwaardere snede zonder steeltje, voor avatar en favicon.
 
 **Lockup**
@@ -118,7 +121,7 @@ Bekeken en afgewezen: de R met saffraandraden. Het teken zweefde los en werd te 
   - Op 240 px goed.
   - Op 150 px verdwijnen de R-haarlijn en de W-snede grotendeels. Het woord blijft dan goed leesbaar, maar oogt als standaard Cormorant.
   - Op 96 px leesbaar.
-- A, secundair teken: op 32 px leesbaar als drie bladen. Op 16 px is het alleen nog een vorm.
+- A, secundair teken: op 32 px leesbaar als drie draden met open uiteinden. Op 16 px is het alleen nog een vorm.
 - B, woordmerk: stevig tot 96 px. De zwaai verdwijnt onder ongeveer 150 px.
 - B, monogram: leesbaar tot 16 px.
 

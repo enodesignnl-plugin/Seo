@@ -7,9 +7,8 @@ const { mark } = require('./saffron.cjs');
 const royal = require('./royal.cjs');
 const warm = require('./warm.cjs');
 
-// the saffron mark, final form (asymmetric: the threads lean as a picked stigma does)
-const SMALL = { nib: 86, min: 0.16, pow: 2, stem: false };
-const SAFFRON = { threads: [[-6, -336, -8], [-100, -270, -30], [124, -250, 60]], pow: 2.4, nib: 62, stem: 44 };
+const SMALL = { nib: 92, min: 0.16, f0: 0.3, k: 1.2, cup: 26, stem: 0 };
+const SAFFRON = {};                    // the mark as drawn in saffron.cjs
 
 function wordmark(M) {
   const { glyphs, pos } = M.set();

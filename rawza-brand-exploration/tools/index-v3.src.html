@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RAWZA Logo's Ronde 3</title>
+<style>
+/* Layout: one dark gallery wall, two logos hung large, each followed by its own small proof strip */
+@font-face { font-family: "Cormorant Garamond"; font-weight: 300; font-display: swap; src: url(fonts/CormorantGaramond-Light.woff2) format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/CormorantGaramond-Italic.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 300; font-display: swap; src: url(fonts/Jost-Light.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 400; font-display: swap; src: url(fonts/Jost-Regular.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 500; font-display: swap; src: url(fonts/Jost-Medium.woff2) format("woff2"); }
+:root {
+  --walnut: #2A1C17;
+  --walnut-deep: #1F1410;
+  --garnet: #4B2229;
+  --champagne: #C8AC7E;
+  --ivory: #F4EEE3;
+  --lapis: #2D4B7A;
+  --lapis-light: #5677B4;
+  --saffron: #B5432F;
+  --saffron-light: #C9553D;
+  --muted: rgba(244, 238, 227, .62);
+  --rule: rgba(200, 172, 126, .2);
+  --serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --sans: "Jost", "Futura", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--walnut); }
+body { margin: 0; color: var(--ivory); font: 300 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+svg.logo { display: block; width: 100%; height: auto; fill: currentColor; overflow: visible; }
+.label { font: 500 11px/1.4 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--champagne); }
+h1, h2 { margin: 0; font-weight: 300; font-family: var(--serif); text-wrap: balance; }
+p { margin: 0; }
+
+header { padding-block: clamp(56px, 9vw, 120px) clamp(32px, 5vw, 64px); }
+header h1 { font-size: clamp(44px, 7vw, 96px); line-height: 1; margin: 18px 0 22px; color: var(--ivory); }
+header p { max-width: 62ch; color: var(--muted); font-size: 17px; }
+
+.logo-sec { padding-block: clamp(24px, 4vw, 48px) clamp(64px, 9vw, 120px); border-top: 1px solid var(--rule); }
+.sec-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; padding-block: 18px 26px; }
+.sec-top h2 { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; }
+.sec-top h2 em { font-style: italic; color: var(--champagne); }
+.hero { display: grid; place-items: center; background: var(--walnut-deep); color: var(--champagne); padding: clamp(40px, 8vw, 120px) clamp(20px, 6vw, 96px); min-height: min(68vh, 680px); }
+.hero .logo { width: min(86%, 960px); }
+.hero .logo { width: min(74%, 860px); }
+#logo-1 { --accent: var(--saffron-light); }
+#logo-2 { --accent: var(--lapis-light); }
+#logo-1 .tile--ivory { --accent: var(--saffron); }
+.story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 56px); padding-block: 28px 36px; }
+.story p { color: var(--muted); font-size: 15.5px; max-width: 58ch; }
+.story p b { color: var(--ivory); font-weight: 400; }
+.proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tile { position: relative; margin: 0; display: grid; place-items: center; aspect-ratio: 4 / 3; max-width: 100%; padding: 12%; }
+.tile figcaption { position: absolute; left: 14px; bottom: 10px; font-size: 11px; letter-spacing: .06em; opacity: .7; }
+.tile--ivory { background: var(--ivory); color: var(--walnut); --accent: var(--lapis); }
+.tile--garnet { background: var(--garnet); color: var(--champagne); }
+.tile--lapis { background: var(--lapis); color: var(--champagne); --accent: var(--ivory) !important; }
+.tile .logo { max-height: 100%; }
+.tile--mark .logo { width: 24%; }
+.tile .logo[style*='height'] { width: auto; }
+.tile--small { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 16px; padding: 10% 12%; }
+.tile--small .logo { width: auto; }
+
+.notes { padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--rule); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); }
+.notes h2 { font-size: clamp(26px, 3vw, 38px); margin: 12px 0 16px; }
+.notes ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+.notes li { margin-bottom: 8px; }
+.notes li b { color: var(--ivory); font-weight: 400; }
+footer { padding-block: 24px 40px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+
+@media (max-width: 760px) {
+  .story, .notes { grid-template-columns: minmax(0, 1fr); }
+  .proof { grid-template-columns: minmax(0, 1fr); }
+  .hero { min-height: 0; aspect-ratio: 4 / 5; }
+  .hero .logo { width: 94%; }
+}
+</style>
+</head>
+<body>
+<!--SPRITE-->
+<header class="wrap">
+  <span class="label">RAWZA · Afghaans restaurant · Apeldoorn</span>
+  <h1>Het woordmerk van ronde 1, met een blad erboven</h1>
+  <p>De letters zijn weer precies die van logo A uit de eerste ronde, met de lange R. Daarboven staat een klein blad-icoon, zoals bij Raaya's en Kaaj. Er is geen boog of koepel meer. Hieronder staan twee varianten van het icoon.</p>
+</header>
+
+<section class="logo-sec wrap" id="logo-1">
+  <div class="sec-top"><span class="label">Logo 1</span><h2>Saffraan <em>uit Herat</em></h2></div>
+  <div class="hero"><svg data-use="logo1" class="logo"></svg></div>
+  <div class="story">
+    <p><b>Drie bladeren, drie draden.</b> Het icoon is een saffraankrokus: drie smalle bladeren met daarboven de drie draden die saffraan worden. Herat staat bekend om zijn saffraan, die als een van de beste ter wereld geldt. Het is dus echt Afghaans en hoort bij de keuken.</p>
+    <p><b>Eén warm accent.</b> De draden kunnen saffraanrood zijn, de enige tweede kleur. In één kleur goud werkt het icoon net zo goed, bijvoorbeeld bij foliedruk of op een gevel.</p>
+  </div>
+  <div class="proof">
+    <figure class="tile tile--ivory"><svg data-use="logo1" class="logo"></svg><figcaption>Walnoot op ivoor, rode draden</figcaption></figure>
+    <figure class="tile tile--garnet tile--mark" style="--accent: var(--champagne)"><svg data-use="logo1-icon" class="logo"></svg><figcaption>Icoon, één kleur goud</figcaption></figure>
+    <figure class="tile tile--ivory tile--small">
+      <svg data-use="logo1" class="logo" style="height:110px"></svg>
+      <svg data-use="logo1-icon" class="logo" style="height:32px"></svg>
+      <figcaption>Klein formaat</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="logo-sec wrap" id="logo-2">
+  <div class="sec-top"><span class="label">Logo 2</span><h2>Het <em>kiemblad</em></h2></div>
+  <div class="hero"><svg data-use="logo2" class="logo"></svg></div>
+  <div class="story">
+    <p><b>Twee bladeren die opengaan.</b> Een jonge plant uit één steel, met daartussen een achtpuntige ster als zaadje. Het is rustiger en klassieker dan de saffraan, en het dichtst bij de sfeer van Raaya's.</p>
+    <p><b>Lapis als zaadje.</b> De ster komt uit je eerste gouden RAWZA-experiment en is lapisblauw, de steen van Badakhshan. In één kleur goud blijft het icoon goed leesbaar.</p>
+  </div>
+  <div class="proof">
+    <figure class="tile tile--ivory"><svg data-use="logo2" class="logo"></svg><figcaption>Walnoot op ivoor, lapis ster</figcaption></figure>
+    <figure class="tile tile--lapis tile--mark"><svg data-use="logo2-icon" class="logo"></svg><figcaption>Icoon op lapis</figcaption></figure>
+    <figure class="tile tile--ivory tile--small">
+      <svg data-use="logo2" class="logo" style="height:110px"></svg>
+      <svg data-use="logo2-icon" class="logo" style="height:32px"></svg>
+      <figcaption>Klein formaat</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="notes wrap">
+  <div>
+    <span class="label">Wat er anders is dan ronde 2</span>
+    <h2>Terug naar de letters die je mooi vond</h2>
+    <ul>
+      <li><b>Woordmerk</b> weer exact zoals logo A in ronde 1, inclusief de lange R.</li>
+      <li><b>Geen boog</b> of koepel meer. Alleen een blad-icoon boven de naam.</li>
+      <li><b>Icoon klein en sierlijk</b>, ongeveer zo groot als bij Raaya's.</li>
+    </ul>
+  </div>
+  <div>
+    <span class="label">Volgende stap</span>
+    <h2>Kies er één</h2>
+    <ul>
+      <li>Saffraan of kiemblad, of een combinatie.</li>
+      <li>Daarna werk ik het gekozen logo verder uit.</li>
+      <li>De SVG-bestanden staan in de map <b>svg/</b>.</li>
+    </ul>
+  </div>
+</section>
+<footer class="wrap">RAWZA · logo's ronde 3 · conceptontwerp</footer>
+</body>
+</html>

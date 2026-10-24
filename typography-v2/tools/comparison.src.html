@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RAWZA Woordmerken</title>
+<style>
+/* Layout: a typographer's proof sheet — two columns, A beside B, the marks do the talking */
+@font-face { font-family: "Cormorant Garamond"; font-weight: 300; font-display: swap; src: url(fonts/CormorantGaramond-Light.woff2) format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/CormorantGaramond-Italic.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 300; font-display: swap; src: url(fonts/Jost-Light.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 400; font-display: swap; src: url(fonts/Jost-Regular.woff2) format("woff2"); }
+@font-face { font-family: "Jost"; font-weight: 500; font-display: swap; src: url(fonts/Jost-Medium.woff2) format("woff2"); }
+:root {
+  --paper: #FBFAF7;
+  --ink: #17120F;
+  --muted: #6F665E;
+  --rule: rgba(23, 18, 15, .12);
+  --chocolate: #2A1C17;
+  --champagne: #C8AC7E;
+  --ivory: #F4EEE3;
+  --brown: #3B2A22;
+  --mark: #9C7743;
+  --serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --sans: "Jost", "Futura", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--paper); }
+body { margin: 0; color: var(--ink); font: 300 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.wrap { max-width: 1280px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.label { font: 500 11px/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; text-wrap: balance; }
+p { margin: 0; }
+svg.wm { display: block; width: 100%; height: auto; fill: currentColor; }
+
+header { padding-block: clamp(48px, 8vw, 104px) clamp(28px, 4vw, 48px); }
+header h1 { font-size: clamp(42px, 6.4vw, 84px); line-height: 1; margin: 16px 0 20px; }
+header p { max-width: 64ch; color: #4C443D; font-size: 17px; }
+
+section { padding-block: clamp(36px, 5vw, 64px); border-top: 1px solid var(--rule); }
+.sec-title { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; }
+.sec-title h2 { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.05; }
+
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.colhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 10px; }
+.colhead h3 { font-size: 24px; }
+.colhead h3 em { font-style: italic; }
+.cell { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; max-width: 100%; padding: 9% 11%; }
+.cell figcaption { position: absolute; left: 14px; bottom: 10px; font-size: 11px; letter-spacing: .05em; opacity: .65; }
+.cell--bw { background: #FFFFFF; color: #000000; box-shadow: inset 0 0 0 1px var(--rule); }
+.cell--choc { background: var(--chocolate); color: var(--champagne); }
+.cell--ivory { background: var(--ivory); color: var(--brown); }
+.rows { display: grid; gap: 12px; }
+
+.scale { background: #FFFFFF; box-shadow: inset 0 0 0 1px var(--rule); padding: clamp(18px, 3vw, 32px); display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px 34px; }
+.scale figure { margin: 0; }
+.scale svg { width: auto; }
+.scale figcaption { margin-top: 8px; font-size: 11px; color: var(--muted); letter-spacing: .05em; }
+
+.details { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.details--b { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.detail { margin: 0; }
+.detail svg { display: block; width: 100%; height: auto; aspect-ratio: 1; background: #FFFFFF; box-shadow: inset 0 0 0 1px var(--rule); fill: var(--ink); }
+.detail figcaption { padding-top: 12px; font-size: 14px; color: #4C443D; }
+.detail figcaption b { display: block; font: 400 22px/1.15 var(--serif); color: var(--ink); margin-bottom: 4px; }
+
+.notes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 56px); }
+.notes h3 { font-size: 26px; margin: 8px 0 12px; }
+.notes ul { margin: 0; padding-left: 18px; font-size: 15px; color: #4C443D; }
+.notes li { margin-bottom: 8px; }
+.notes li b { font-weight: 500; color: var(--ink); }
+.honest { background: #F3EEE6; padding: clamp(20px, 3vw, 32px); font-size: 15px; color: #4C443D; }
+.honest p + p { margin-top: 10px; }
+.honest b { font-weight: 500; color: var(--ink); }
+code { font: 400 13px/1.4 ui-monospace, Menlo, monospace; }
+footer { padding-block: 24px 40px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .pair, .notes { grid-template-columns: minmax(0, 1fr); }
+  .details, .details--b { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .colhead--b-mobile { margin-top: 20px; }
+}
+</style>
+</head>
+<body>
+<!--SPRITE-->
+<header class="wrap">
+  <span class="label">RAWZA · Afghaans restaurant · Apeldoorn · typografie, ronde 4</span>
+  <h1>Twee woordmerken, alleen de letters</h1>
+  <p>Geen iconen, geen mockups. Twee richtingen waarin het woordmerk zelf de identiteit is. A verfijnt de klassieke hoofdletters die je mooi vond. B is een nieuwe, expressieve letter in onderkast: <i>Rawza</i>. Beide zijn als vectorvormen getekend, niet gezet uit een bestaand lettertype.</p>
+</header>
+
+<section class="wrap" aria-labelledby="cmp">
+  <div class="sec-title"><h2 id="cmp">Naast elkaar</h2><span class="label">groot formaat</span></div>
+  <div class="pair">
+    <div>
+      <div class="colhead"><h3>A · <em>Refined Signature</em></h3><span class="label">RAWZA</span></div>
+      <div class="rows">
+        <figure class="cell cell--bw"><svg class="wm" viewBox="{{VB_A}}" role="img" aria-label="RAWZA, richting A"><use href="#wm-a"/></svg><figcaption>Zwart op wit</figcaption></figure>
+        <figure class="cell cell--choc"><svg class="wm" viewBox="{{VB_A}}" role="img" aria-label="RAWZA, richting A"><use href="#wm-a"/></svg><figcaption>Champagne op chocoladebruin</figcaption></figure>
+        <figure class="cell cell--ivory"><svg class="wm" viewBox="{{VB_A}}" role="img" aria-label="RAWZA, richting A"><use href="#wm-a"/></svg><figcaption>Donkerbruin op ivoor</figcaption></figure>
+      </div>
+    </div>
+    <div>
+      <div class="colhead colhead--b-mobile"><h3>B · <em>Expressive Editorial</em></h3><span class="label">Rawza</span></div>
+      <div class="rows">
+        <figure class="cell cell--bw"><svg class="wm" viewBox="{{VB_B}}" role="img" aria-label="Rawza, richting B"><use href="#wm-b"/></svg><figcaption>Zwart op wit</figcaption></figure>
+        <figure class="cell cell--choc"><svg class="wm" viewBox="{{VB_B}}" role="img" aria-label="Rawza, richting B"><use href="#wm-b"/></svg><figcaption>Champagne op chocoladebruin</figcaption></figure>
+        <figure class="cell cell--ivory"><svg class="wm" viewBox="{{VB_B}}" role="img" aria-label="Rawza, richting B"><use href="#wm-b"/></svg><figcaption>Donkerbruin op ivoor</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="small">
+  <div class="sec-title"><h2 id="small">Klein formaat</h2><span class="label">hoogte van de hoofdletter R in pixels</span></div>
+  <div class="rows">
+    <div class="scale">
+      <figure><svg class="wm" viewBox="{{VB_A}}" data-cap="40"><use href="#wm-a"/></svg><figcaption>A · 40 px</figcaption></figure>
+      <figure><svg class="wm" viewBox="{{VB_A}}" data-cap="24"><use href="#wm-a"/></svg><figcaption>24 px</figcaption></figure>
+      <figure><svg class="wm" viewBox="{{VB_A}}" data-cap="16"><use href="#wm-a"/></svg><figcaption>16 px</figcaption></figure>
+      <figure><svg class="wm" viewBox="{{VB_A}}" data-cap="11"><use href="#wm-a"/></svg><figcaption>11 px</figcaption></figure>
+    </div>
+    <div class="scale">
+      <figure><svg class="wm" viewBox="{{VB_B}}" data-cap="40"><use href="#wm-b"/></svg><figcaption>B · 40 px</figcaption></figure>
+      <figure><svg class="wm" viewBox="{{VB_B}}" data-cap="24"><use href="#wm-b"/></svg><figcaption>24 px</figcaption></figure>
+      <figure><svg class="wm" viewBox="{{VB_B}}" data-cap="16"><use href="#wm-b"/></svg><figcaption>16 px</figcaption></figure>
+      <figure><svg class="wm" viewBox="{{VB_B}}" data-cap="11"><use href="#wm-b"/></svg><figcaption>11 px</figcaption></figure>
+    </div>
+  </div>
+  <p style="margin-top:16px;max-width:78ch;font-size:14px;color:#4C443D"><b style="font-weight:500;color:#17120F">Beoordeling.</b> A blijft goed tot ongeveer 16 px. Daaronder worden de haarlijnen grijs en verdwijnen de dwarsbalken van de A; voor kleine toepassingen is een zwaardere versie nodig, zoals de "small cut" uit ronde 1. B blijft door de grote x-hoogte tot ongeveer 11 px leesbaar, al verdwijnen de haarlijnen van de w en z daar als eerste.</p>
+</section>
+
+<section class="wrap" aria-labelledby="det-a">
+  <div class="sec-title"><h2 id="det-a">Details A</h2><span class="label">aangepaste letters, vergroot</span></div>
+  <div class="details">
+    <figure class="detail"><svg viewBox="{{VB_a-R}}" aria-hidden="true"><use href="#d-a-R"/></svg><figcaption><b>R</b>De staart is korter dan in ronde 1, loopt dun uit en eindigt licht omhoog. De boog van de R is iets kleiner, waardoor het been langer en rustiger wordt.</figcaption></figure>
+    <figure class="detail"><svg viewBox="{{VB_a-A}}" aria-hidden="true"><use href="#d-a-A"/></svg><figcaption><b>A</b>Een kleine snavel links aan de top, zoals in Romeinse inscripties. De dwarsbalk is laag geplaatst als haarlijn.</figcaption></figure>
+    <figure class="detail"><svg viewBox="{{VB_a-W}}" aria-hidden="true"><use href="#d-a-W"/></svg><figcaption><b>W</b>Twee V's die elkaar kruisen. De kruising valt in het midden van het woord.</figcaption></figure>
+    <figure class="detail"><svg viewBox="{{VB_a-Z}}" aria-hidden="true"><use href="#d-a-Z"/></svg><figcaption><b>Z</b>Bewust rustig gehouden. De snavels aan beide balken herhalen die van de A.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="det-b">
+  <div class="sec-title"><h2 id="det-b">Details B</h2><span class="label">aangepaste letters, vergroot</span></div>
+  <div class="details details--b">
+    <figure class="detail"><svg viewBox="{{VB_b-R}}" aria-hidden="true"><use href="#d-b-R"/></svg><figcaption><b>R</b>Hoog contrast met een verticale as. Het been is licht hol en loopt op de basislijn uit in een spitse voet die naar de a wijst.</figcaption></figure>
+    <figure class="detail"><svg viewBox="{{VB_b-a}}" aria-hidden="true"><use href="#d-b-a"/></svg><figcaption><b>a</b>Tweeverdiepings-a met een bolle druppel bovenaan en een opgekrulde voet. Hij komt twee keer voor en bepaalt het ritme.</figcaption></figure>
+    <figure class="detail"><svg viewBox="{{VB_b-wz}}" aria-hidden="true"><use href="#d-b-wz"/></svg><figcaption><b>wz</b>De enige ligatuur. De haarlijn bovenaan de w loopt door als de bovenbalk van de z.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="why">
+  <div class="sec-title"><h2 id="why">Waarom zo</h2></div>
+  <div class="notes">
+    <div>
+      <span class="label">Richting A</span>
+      <h3>Klassiek, breed, ingetogen</h3>
+      <ul>
+        <li><b>Brede Romeinse verhoudingen</b> met gebogen schreven en een contrast van ongeveer 5,5 : 1.</li>
+        <li><b>Drie bijzondere letters, niet meer.</b> De R-staart, de gekruiste W en de snavel van de A. De Z blijft rustig.</li>
+        <li>Het woord is <b>symmetrisch rond de W</b>, met aan beide kanten een A.</li>
+      </ul>
+    </div>
+    <div>
+      <span class="label">Richting B</span>
+      <h3>Redactioneel, warm, ritmisch</h3>
+      <ul>
+        <li><b>Een ander skelet:</b> hoofdletter met onderkast, grote x-hoogte, verticale as en een contrast van ongeveer 9 : 1. De schreven zijn dunne haarlijnen zonder boogje.</li>
+        <li><b>Ronde druppels</b> aan beide a's tegenover de rechte w en z. Samen met de uitlopende voet van de R geeft dat een zacht, gastvrij ritme.</li>
+        <li><b>Eén ligatuur</b> (wz), klein genoeg om niet op te vallen, maar zichtbaar als je kijkt.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="basis">
+  <div class="sec-title"><h2 id="basis">Basis, licentie en bestanden</h2></div>
+  <div class="honest">
+    <p><b>Geen bestaand lettertype als basis.</b> Beide woordmerken zijn met code getekend uit lijnen, bézierkrommen en booleaanse bewerkingen. Er zijn geen letters uit een font overgenomen of overgetrokken. Ze volgen wel bekende modellen: A de Romeinse inscriptiekapitaal en de Didot-displayletter, B de Didone-letter (de traditie van Bodoni en Didot). Er geldt dus geen fontlicentie voor de logo's zelf. Het is wel concepttekenwerk, geen afgewerkte letter: krommen, overshoots en spatiëring moeten in Illustrator met de hand worden afgemaakt.</p>
+    <p><b>Lettertypes op deze pagina:</b> Cormorant Garamond en Jost (SIL Open Font License) zijn alleen gebruikt voor de uitleg en zitten niet in de logobestanden.</p>
+    <p><b>Bestanden:</b> <code>rawza-direction-a-wordmark.svg</code> en <code>rawza-direction-b-wordmark.svg</code>. Elke letter is een aparte groep (<code>letter-R</code>, <code>letter-A-1</code> …) met een eigen pad. Gaten in letters zijn samengestelde paden, alles is in effen zwart op een transparante achtergrond, zonder tekst, filters of afbeeldingen.</p>
+  </div>
+</section>
+
+<footer class="wrap">RAWZA · woordmerken · conceptontwerp voor uitwerking in Illustrator</footer>
+<script>
+  // size the small-scale proofs so the capital R is exactly data-cap pixels tall (cap = 700 units)
+  document.querySelectorAll('svg[data-cap]').forEach(function (s) {
+    var v = s.getAttribute('viewBox').split(' ').map(Number), k = +s.getAttribute('data-cap') / 700;
+    s.style.width = (v[2] * k).toFixed(1) + 'px'; s.style.height = (v[3] * k).toFixed(1) + 'px';
+  });
+</script>
+</body>
+</html>

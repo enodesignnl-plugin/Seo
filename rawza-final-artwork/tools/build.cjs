@@ -35,13 +35,13 @@ function inspect(item) {
 }
 
 // ---------- letters at their final positions; origin at the artwork's top-left plus PAD.
-// The vertical frame is the same for both marks: cap line at y = PAD + 10, so both files share
-// one optical height (cap 700 units) and can be placed at identical scale.
+// The vertical frame is the same for both marks: cap line at y = PAD + 10, height 900, so both
+// files share one optical height (cap 700 units) and can be placed at identical scale.
 function build(set) {
   const { glyphs, pos } = set();
   const letters = glyphs.map((g, i) => ({ id: g.id, shape: translate(g.shape, pos[i], 0) }));
   const b = letters.map((l) => l.shape.bounds).reduce((acc, r) => acc.unite(r));
-  const top = -10, bottom = 770;                      // frame: 10 above the cap line, 70 below the baseline
+  const top = -10, bottom = 810;                      // frame: 10 above the cap line, 110 below the baseline
   if (b.y < top || b.y + b.height > bottom) throw new Error('artwork outside the shared frame');
   const dx = PAD - b.x, dy = PAD - top;
   const W = Math.ceil(b.width + 2 * PAD), Hh = Math.ceil(bottom - top + 2 * PAD);
@@ -69,19 +69,18 @@ const artB = build(B.set);
 writeSvg('rawza-a-signature.svg', artA, 'Direction A, The Signature', 'Foundation: Cormorant Garamond (SIL OFL 1.1), edited.');
 writeSvg('rawza-b-editorial.svg', artB, 'Direction B, The Editorial', 'Foundation: Bodoni Moda (SIL OFL 1.1), edited. The w–z join is part of letter-z and overlaps the top of the w.');
 
-// ---------- art-direction page: v4 artwork is read from typography-v4 (unchanged)
-const V4 = path.join(__dirname, '..', '..', 'typography-v4');
+// ---------- art-direction page: the previous round (v5) is read from ../archive-v5 (unchanged)
+const V5 = path.join(__dirname, '..', 'archive-v5');
 function readSvg(file) {
   const s = fs.readFileSync(file, 'utf8');
   const vb = s.match(/viewBox="([^"]+)"/)[1].split(' ').map(Number);
   const paths = [...s.matchAll(/<path[^>]* d="([^"]+)"/g)].map((m) => `<path d="${m[1]}"/>`).join('');
   return { vb, paths };
 }
-const v4a = readSvg(path.join(V4, 'concept-a.svg'));
-const v4b = readSvg(path.join(V4, 'concept-b.svg'));
-// v4 files have PAD 40 around their own bounds; put them in the shared frame by their cap line.
-// v4 A's top is the R at y -3.4 (cap line 43.4 in its file), v4 B's top is the R at 0 (cap line 40).
-const frame = (vb, capInFile) => `0 ${capInFile - (PAD + 10)} ${vb[2]} ${artA.Hh}`;
+const v4a = readSvg(path.join(V5, 'rawza-a-signature.svg'));
+const v4b = readSvg(path.join(V5, 'rawza-b-editorial.svg'));
+// v5 files have the cap line at y 50 too (frame height 860); show them in the 900-high frame
+const frame = (vb) => `0 0 ${vb[2]} ${artA.Hh}`;
 const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <g id="mark-a">${artA.placed.map((l) => `<path d="${l.d}"/>`).join('')}</g>
 <g id="mark-b">${artB.placed.map((l) => `<path d="${l.d}"/>`).join('')}</g>
@@ -92,8 +91,8 @@ const html = fs.readFileSync(path.join(__dirname, 'art-direction.src.html'), 'ut
   .replace('<!--SPRITE-->', sprite)
   .replace(/\{\{VB_A\}\}/g, `0 0 ${artA.W} ${artA.Hh}`)
   .replace(/\{\{VB_B\}\}/g, `0 0 ${artB.W} ${artB.Hh}`)
-  .replace(/\{\{VB_V4A\}\}/g, frame(v4a.vb, 43.36))
-  .replace(/\{\{VB_V4B\}\}/g, frame(v4b.vb, 40))
+  .replace(/\{\{VB_V4A\}\}/g, frame(v4a.vb))
+  .replace(/\{\{VB_V4B\}\}/g, frame(v4b.vb))
   .replace(/\{\{RA\}\}/g, (artA.W / artA.Hh).toFixed(4))
   .replace(/\{\{RB\}\}/g, (artB.W / artB.Hh).toFixed(4))
   .replace(/\{\{RV4A\}\}/g, (v4a.vb[2] / artA.Hh).toFixed(4))

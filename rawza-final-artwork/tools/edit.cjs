@@ -66,4 +66,24 @@ function stretchX(shape, { x0, x1, L, yMin }) {
   return out;
 }
 
-module.exports = { shiftLine, dropSpecks, thinDiagonal, stretchX };
+// Smooth warp of an outline: every anchor moves by fn(x, y) -> [x', y']; handles follow the local
+// Jacobian of fn (numerical), so curves keep their character and joins stay tangent.
+function warp(shape, fn) {
+  const out = shape.clone({ insert: false });
+  const kids = out.children ? out.children : [out];
+  const J = (x, y) => {
+    const e = 0.5, [ax, ay] = fn(x + e, y), [bx, by] = fn(x - e, y), [cx, cy] = fn(x, y + e), [dx, dy] = fn(x, y - e);
+    return [[(ax - bx) / (2 * e), (cx - dx) / (2 * e)], [(ay - by) / (2 * e), (cy - dy) / (2 * e)]];
+  };
+  for (const p of kids) for (const sg of p.segments) {
+    const { x, y } = sg.point, [[a, b], [c, d]] = J(x, y), [nx, ny] = fn(x, y);
+    const map = (h) => [a * h.x + b * h.y, c * h.x + d * h.y];
+    const hi = map(sg.handleIn), ho = map(sg.handleOut);
+    sg.point = sg.point.constructor ? new sg.point.constructor(nx, ny) : sg.point;
+    sg.handleIn = new sg.handleIn.constructor(hi[0], hi[1]);
+    sg.handleOut = new sg.handleOut.constructor(ho[0], ho[1]);
+  }
+  return out;
+}
+
+module.exports = { shiftLine, dropSpecks, thinDiagonal, stretchX, warp };

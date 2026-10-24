@@ -1,0 +1,6 @@
+{
+  "name": "rawza-final-artwork",
+  "private": true,
+  "scripts": { "build": "node build.cjs", "studies": "sh studies.sh" },
+  "dependencies": { "opentype.js": "1.3.4", "paper-jsdom": "0.16.0" }
+}

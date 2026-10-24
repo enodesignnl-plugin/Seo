@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RAWZA Eindronde Woordmerk</title>
+<style>
+/* Proof sheet: one column, each test a band; marks always at one shared cap height per band. */
+:root {
+  --page: #F3EEE6; --ink: #1E1612; --muted: #6F6359; --rule: rgba(30, 22, 18, .14);
+  --plate-light: #FFFFFF; --plate-dark: #2A1C17; --champagne: #CDB287; --ivory: #F4EDE1; --walnut: #4A3125;
+  --sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --cap: clamp(34px, 7.4vw, 92px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --page: #17110E; --ink: #EFE7DC; --muted: #A8998B; --rule: rgba(239, 231, 220, .16); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --page: #17110E; --ink: #EFE7DC; --muted: #A8998B; --rule: rgba(239, 231, 220, .16); color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { background: var(--page); }
+body { margin: 0; color: var(--ink); font: 400 15px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { margin: 0; font-weight: 500; text-wrap: balance; }
+p { margin: 0; }
+.eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+
+.top { padding-block: clamp(32px, 6vw, 72px) clamp(20px, 3vw, 32px); display: grid; gap: 12px; }
+.top h1 { font-size: clamp(26px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -.01em; }
+.top p { max-width: 68ch; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 6px; }
+.legend span { font-size: 13px; }
+.legend b { font-weight: 600; }
+
+.band { border-top: 1px solid var(--rule); padding-block: clamp(26px, 4vw, 44px); }
+.band__head { display: grid; gap: 4px; margin-bottom: 16px; }
+.band__head h2 { font-size: 19px; }
+.band__head p { color: var(--muted); max-width: 72ch; font-size: 14px; }
+
+svg.mark { display: block; fill: currentColor; }
+svg.mark use { fill: currentColor; }
+.plate { padding: clamp(18px, 3.5vw, 40px) clamp(16px, 3vw, 40px); display: grid; gap: clamp(14px, 2.4vw, 28px); overflow-x: auto; }
+.plate--light { background: var(--plate-light); color: #000000; box-shadow: inset 0 0 0 1px var(--rule); }
+.plate--dark { background: var(--plate-dark); color: var(--champagne); }
+.plate--ivory { background: var(--ivory); color: var(--walnut); }
+.row { display: grid; gap: 6px; }
+.row small { font-size: 11px; letter-spacing: .06em; color: inherit; opacity: .62; }
+/* identical optical height: every mark is drawn in a frame of 860 units for a cap of 700 */
+.cap svg.mark { height: calc(var(--cap) * 860 / 700); width: auto; max-width: none; }
+
+.sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px 34px; }
+.sizes figure { margin: 0; }
+.sizes figcaption { margin-top: 6px; font-size: 11px; opacity: .62; }
+.sizes svg.mark { width: var(--w); height: auto; }
+
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.pair .plate { align-content: start; }
+.tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .62; }
+
+.foot { border-top: 1px solid var(--rule); padding-block: 22px 40px; font-size: 12px; color: var(--muted); display: grid; gap: 6px; }
+
+@media (max-width: 760px) {
+  .pair { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<!--SPRITE-->
+<header class="top wrap">
+  <span class="eyebrow">RAWZA · Afghaans restaurant · eindronde woordmerk</span>
+  <h1>Twee woordmerken, elk met één eigen typografisch gebaar</h1>
+  <p>Alles op deze pagina is de getekende vector zelf, zonder ondertitel, icoon of mockup. In elke test staan A en B op dezelfde kapitaalhoogte of dezelfde breedte, zodat ze eerlijk naast elkaar te beoordelen zijn.</p>
+  <div class="legend">
+    <span><b>A · The Signature</b>: de R loopt uit in een korte, dalende haal die vóór de A ophoudt.</span>
+    <span><b>B · The Editorial</b>: de laatste haal van de w draait in één ronde beweging over in de bovenbalk van de z.</span>
+  </div>
+</header>
+
+<main>
+<section class="band wrap" aria-labelledby="t1">
+  <div class="band__head"><span class="eyebrow">Test 1</span><h2 id="t1">Zwart op wit, gelijke kapitaalhoogte</h2></div>
+  <div class="plate plate--light cap">
+    <div class="row"><svg class="mark" viewBox="{{VB_A}}" role="img" aria-label="RAWZA, richting A"><use href="#mark-a"/></svg><small>A · The Signature</small></div>
+    <div class="row"><svg class="mark" viewBox="{{VB_B}}" role="img" aria-label="Rawza, richting B"><use href="#mark-b"/></svg><small>B · The Editorial</small></div>
+  </div>
+</section>
+
+<section class="band wrap" aria-labelledby="t2">
+  <div class="band__head"><span class="eyebrow">Test 2</span><h2 id="t2">Champagne op donkerchocolade, zelfde schaal</h2></div>
+  <div class="plate plate--dark cap">
+    <div class="row"><svg class="mark" viewBox="{{VB_A}}" role="img" aria-label="RAWZA, richting A"><use href="#mark-a"/></svg><small>A · The Signature</small></div>
+    <div class="row"><svg class="mark" viewBox="{{VB_B}}" role="img" aria-label="Rawza, richting B"><use href="#mark-b"/></svg><small>B · The Editorial</small></div>
+  </div>
+</section>
+
+<section class="band wrap" aria-labelledby="t3">
+  <div class="band__head"><span class="eyebrow">Test 3</span><h2 id="t3">400, 240, 150 en 96 px breed</h2><p>Breedte van het hele woordmerk in CSS-pixels. Bekijk deze rij ook op een gewoon scherm (geen retina): daar vallen haarlijnen het eerst weg.</p></div>
+  <div class="pair">
+    <div class="plate plate--light">
+      <span class="tag">A · wit</span>
+      <div class="sizes">
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:400px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>400 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:240px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>240 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:150px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>150 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:96px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>96 px</figcaption></figure>
+      </div>
+    </div>
+    <div class="plate plate--light">
+      <span class="tag">B · wit</span>
+      <div class="sizes">
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:400px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>400 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:240px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>240 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:150px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>150 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:96px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>96 px</figcaption></figure>
+      </div>
+    </div>
+    <div class="plate plate--dark">
+      <span class="tag">A · champagne op chocolade</span>
+      <div class="sizes">
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:400px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>400 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:240px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>240 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:150px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>150 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_A}}" style="--w:96px" role="img" aria-label="RAWZA"><use href="#mark-a"/></svg><figcaption>96 px</figcaption></figure>
+      </div>
+    </div>
+    <div class="plate plate--dark">
+      <span class="tag">B · champagne op chocolade</span>
+      <div class="sizes">
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:400px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>400 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:240px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>240 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:150px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>150 px</figcaption></figure>
+        <figure><svg class="mark" viewBox="{{VB_B}}" style="--w:96px" role="img" aria-label="Rawza"><use href="#mark-b"/></svg><figcaption>96 px</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band wrap" aria-labelledby="t4">
+  <div class="band__head"><span class="eyebrow">Test 4</span><h2 id="t4">Eén kleur, zonder ondertitel</h2><p>Walnootbruin op warm ivoor, de kleuren uit de referenties van de klant. Eén vlakke kleur, geen verloop of effect.</p></div>
+  <div class="pair">
+    <div class="plate plate--ivory cap"><svg class="mark" viewBox="{{VB_A}}" style="height:calc(var(--cap) * 0.62 * 860 / 700)" role="img" aria-label="RAWZA, richting A"><use href="#mark-a"/></svg></div>
+    <div class="plate plate--ivory cap"><svg class="mark" viewBox="{{VB_B}}" style="height:calc(var(--cap) * 0.62 * 860 / 700)" role="img" aria-label="Rawza, richting B"><use href="#mark-b"/></svg></div>
+  </div>
+</section>
+
+<section class="band wrap" aria-labelledby="t5">
+  <div class="band__head"><span class="eyebrow">Ter vergelijking</span><h2 id="t5">Van v4 naar deze ronde, gelijke kapitaalhoogte</h2><p>Boven v4, onder de eindversie. Bij A is de verbinding van R naar A vervangen door een eigen beenhaal; bij B is de letter rustiger in contrast en zit het ene eigen gebaar tussen w en z.</p></div>
+  <div class="plate plate--light cap">
+    <div class="row"><svg class="mark" viewBox="{{VB_V4A}}" role="img" aria-label="RAWZA, v4"><use href="#v4-a"/></svg><small>A · v4</small></div>
+    <div class="row"><svg class="mark" viewBox="{{VB_A}}" role="img" aria-label="RAWZA, eindversie"><use href="#mark-a"/></svg><small>A · eindversie</small></div>
+    <div class="row"><svg class="mark" viewBox="{{VB_V4B}}" role="img" aria-label="Rawza, v4"><use href="#v4-b"/></svg><small>B · v4</small></div>
+    <div class="row"><svg class="mark" viewBox="{{VB_B}}" role="img" aria-label="Rawza, eindversie"><use href="#mark-b"/></svg><small>B · eindversie</small></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot wrap">
+  <p>Bestanden: rawza-a-signature.svg en rawza-b-editorial.svg (vectorcontouren, één groep per letter, geen font nodig) · rawza-decisions.md (beoordeling en resterende punten).</p>
+  <p>Fundamenten: Cormorant Garamond (A) en Bodoni Moda (B), beide SIL Open Font License 1.1; de contouren zijn bewerkt tot logo-artwork.</p>
+</footer>
+</body>
+</html>

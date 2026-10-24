@@ -193,3 +193,40 @@ Kies A. Laat daarna een letterontwerper deze stappen doen:
 - De gebruikte statische instanties zijn gemaakt met fontTools `varLib.instancer`.
 
 **Opnieuw bouwen:** `cd tools && npm install && npm run build`.
+
+## 8. Verfijningsronde richting A (map `refined/`)
+
+Precisieronde op verzoek van de klant. Geen nieuw concept: A, Z, spatiëring en opbouw blijven gelijk. De bestanden van de vorige ronde (`direction-a-*.svg`) zijn ongewijzigd en dienen als "huidig" op `refined/refinement.html`.
+
+**W, halverwege verbonden**
+- Het haarlijntje van de linker V loopt halverwege de hoogte in de dikke streek van de rechter V en stopt daar. Er is geen kruis meer en geen dubbele dikte.
+- De oksel onder de verbinding heeft een zachte boog (straal 20 eenheden).
+- Bovenin verliest de rechter V de binnenste helft van zijn schreef. Zijn linkerrand loopt recht door tot de kaplijn, zodat het midden van de W niet meer vol staat met twee schreven.
+
+**R, fijnere zwaai**
+- De bocht onder de basislijn is ruimer getrokken. De breedte van het been groeit nu vloeiend uit in plaats van abrupt te stoppen. Samen haalt dat de knik uit de buitenrand.
+- De streek wordt pas na de bocht dun en loopt over het laatste stuk uit in een fijne punt.
+- De staart eindigt eerder (reach 310 in plaats van 330) en iets dieper (62 eenheden onder de basislijn). De kleinste afstand tot de A gaat daarmee van 33 naar 43 eenheden.
+
+**Saffraanicoon: terug naar de krokus**
+- Op verzoek van de klant, naar het voorbeeld dat zij aanleverde.
+- Drie smalle bladeren omsluiten de voet. Uit het middelste blad rijzen de drie draden, elk met een klein druppeltje.
+- Bladeren en draden zijn aparte groepen:
+  - in kleur: bladeren goud #CFAE6E, draden saffraanrood #B9442C;
+  - in één kleur: alles goud of zwart.
+- Hoogte ongeveer 0,5 × de kaphoogte, 185 eenheden boven de kaplijn. Het blijft ondergeschikt aan het woordmerk.
+- In de lockup vervalt het lijntje naast de descriptor. Met het icoon erboven is de compositie zonder rustiger.
+
+**Bestanden in `refined/`**
+- `rawza-wordmark.svg`
+- `rawza-lockup.svg` (zwart)
+- `rawza-lockup-colour.svg` (goud met saffraanrode draden, voor donkere ondergrond)
+- `rawza-saffron-icon.svg` en `rawza-saffron-icon-colour.svg`
+- `refinement.html`
+
+Bouwen: `cd tools && node build-refined.cjs`.
+
+**Eerlijk**
+- De W heeft nu een eigen, rustig detail.
+- De R is fijner en blijft ruim vrij van de A.
+- Onder ongeveer 150 px vallen de R-haarlijn en de saffraandraden nog steeds weg. Een kleine-maten-versie blijft een volgende stap.

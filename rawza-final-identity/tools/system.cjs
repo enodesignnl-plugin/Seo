@@ -4,14 +4,15 @@
 const { rect, translate, scale, union } = require('./lib.cjs');
 const { line } = require('./text.cjs');
 const { mark } = require('./saffron.cjs');
+const { icon } = require('./crocus.cjs');
 const royal = require('./royal.cjs');
 const warm = require('./warm.cjs');
 
 const SMALL = { nib: 92, min: 0.16, f0: 0.3, k: 1.2, cup: 26, stem: 0 };
 const SAFFRON = {};                    // the mark as drawn in saffron.cjs
 
-function wordmark(M) {
-  const { glyphs, pos } = M.set();
+function wordmark(M, opts) {
+  const { glyphs, pos } = M.set(opts);
   return glyphs.map((g, i) => ({ id: g.id, item: translate(g.shape, pos[i], 0) }));
 }
 const boundsOf = (pieces) => pieces.map((p) => p.item.bounds).reduce((a, r) => a.unite(r));
@@ -72,4 +73,29 @@ function B(opts = {}) {
   return out;
 }
 
-module.exports = { A, B, boundsOf, capCentre, SAFFRON, TEXTS };
+
+// ---- Direction A, refinement round: tucked W, finer R sweep, saffron crocus icon
+const REFINED = {
+  reach: 310,
+  W: { pen: false, tuck: { r: [0, 20] }, serif: true },
+  R: { dip: 62, lift: 30, t0: 0.3, t1: 0.5, end: 0.12, point: [0.82, 0.3], smooth: true, turn: 55, turnC: 20, turnE: 30 },
+};
+function Aref(opts = {}) {
+  const wm = wordmark(royal, REFINED);
+  const cx = capCentre(wm);
+  const ic = icon();
+  const k = opts.iconScale ?? 1.06, gap = opts.iconGap ?? 185;
+  const place = (item) => { const it = scale(item, k, 0, 0); return translate(it, cx, -gap); };
+  // icon base sits `gap` above the cap line, centred on the letters
+  const leaves = place(ic.leaves), threads = place(ic.threads);
+  const desc = descriptor({ ...DESC.A, cap: 80, track: 0.62, text: TEXTS.full }, cx, opts.descY ?? 905);
+  return {
+    wordmark: wm,
+    threads: [{ id: 'threads', item: threads }],
+    leaves: [{ id: 'leaves', item: leaves }],
+    descriptor: desc,
+    iconAlone: { leaves: [{ id: 'leaves', item: ic.leaves }], threads: [{ id: 'threads', item: ic.threads }] },
+  };
+}
+
+module.exports = { A, Aref, REFINED, B, boundsOf, capCentre, SAFFRON, TEXTS };

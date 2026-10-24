@@ -1,0 +1,162 @@
+<title>RAWZA Verfijning</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one long sheet on deep chocolate; brand tiles sit on their own grounds (chocolate, cream, white),
+   directions side by side on wide screens, stacked on phones. Single deliberate dark look. */
+:root {
+  --ground: #1b120d;      /* page */
+  --cacao: #2a1a12;       /* chocolate tile */
+  --gold: #cfae6e;        /* soft gold for the marks */
+  --champagne: #eadbb8;   /* text on dark */
+  --cream: #f3ebdd;       /* light tile */
+  --ink: #2a1a12;         /* marks on light */
+  --muted: #a8957a;       /* captions */
+  --line: #3d2b20;        /* hairlines on the page */
+  --white: #ffffff;
+  --black: #000000;
+  --saffron: #b9442c;      /* saffron threads, colour versions only */
+  --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--champagne); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 48px 96px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 72px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; text-wrap: balance; color: var(--champagne); }
+h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; }
+h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+h3 { font-size: 22px; }
+p { margin: 0; max-width: 64ch; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.cap { font-size: 13px; color: var(--muted); }
+.stack { display: grid; gap: 16px; }
+.section { display: grid; gap: 28px; border-top: 1px solid var(--line); padding-top: 40px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) { .two, .three { grid-template-columns: 1fr; } .four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.tile { display: grid; place-items: center; padding: clamp(20px, 5vw, 56px); min-height: 220px; }
+.tile.dark { background: var(--cacao); color: var(--gold); }
+.tile.light { background: var(--cream); color: var(--ink); }
+.tile.bw { background: var(--white); color: var(--black); }
+.tile.tall { min-height: 340px; }
+svg.art { display: block; width: 100%; height: auto; fill: currentColor; }
+.lockup { max-width: 520px; }
+.wordmark { max-width: 560px; }
+.mono { max-width: 150px; }
+.hero-tile { min-height: 360px; }
+.hero-tile svg.art { max-width: 460px; }
+.why { display: grid; gap: 8px; }
+.why h3 { color: var(--gold); }
+/* small-size test rows: real pixel widths */
+.sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 28px 36px; padding: 28px; }
+.sizes figure { justify-items: start; }
+.sizes .cap { font-variant-numeric: tabular-nums; }
+.closeup { background: var(--cacao); color: var(--gold); padding: 16px; }
+/* applications */
+.menu { aspect-ratio: 3 / 4.2; max-width: 360px; width: 100%; margin: 0 auto; background: var(--cacao); color: var(--gold); display: grid; grid-template-rows: 1fr auto; padding: 48px 40px; position: relative; box-shadow: 0 30px 60px -30px #000; }
+.menu::before { content: ""; position: absolute; inset: 14px; border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); pointer-events: none; }
+.menu .lock { align-self: center; width: 100%; }
+.menu .label { font-family: var(--display); letter-spacing: .5em; text-align: center; font-size: 13px; color: var(--gold); padding-left: .5em; }
+.cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card { aspect-ratio: 85 / 55; width: min(100%, 340px); display: grid; place-items: center; padding: 28px; box-shadow: 0 24px 50px -28px #000; }
+.card.front { background: var(--cream); color: var(--ink); }
+.card.back { background: var(--cacao); color: var(--gold); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: 13px; }
+td.n { text-align: right; white-space: nowrap; }
+.scroll { overflow-x: auto; }
+.qa { display: grid; gap: 14px; }
+.qa div { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 4px 24px; }
+@media (max-width: 700px) { .qa div { grid-template-columns: 1fr; } }
+.qa b { font-weight: 500; color: var(--champagne); }
+.palette { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip i { display: block; width: 72px; height: 44px; border: 1px solid var(--line); }
+.colour { --th: var(--saffron); }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 700px) { .pair { grid-template-columns: 1fr; } }
+.tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.icon { max-width: 140px; }
+.big { min-height: 440px; }
+.big svg.art { max-width: 620px; }
+ul.changes { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; max-width: 70ch; }
+</style>
+
+<!--SYMBOLS-->
+
+<div class="wrap">
+  <header class="stack">
+    <div class="eyebrow">Rawza · richting A · precisieronde</div>
+    <h1>Verfijning van de W, de R en het saffraanicoon</h1>
+    <p>Geen nieuw concept, alleen verfijning. De W krijgt een eigen verbinding halverwege, de staart van de R wordt fijner en eindigt rustiger, en het saffraanicoon gaat terug naar de krokus met drie draden. A, Z en de opbouw blijven zoals ze waren.</p>
+  </header>
+
+  <section class="section" aria-labelledby="cmp">
+    <h2 id="cmp">Huidig en verfijnd</h2>
+    <div class="pair">
+      <figure><div class="tile dark tall"><svg class="art lockup" style="aspect-ratio: {{AR_cur-lockup}}"><use href="#cur-lockup"/></svg></div><figcaption class="tag">Huidig · goud op donkerbruin</figcaption></figure>
+      <figure><div class="tile dark tall colour"><svg class="art lockup" style="aspect-ratio: {{AR_ref-lockup}}"><use href="#ref-lockup"/></svg></div><figcaption class="tag">Verfijnd · goud op donkerbruin</figcaption></figure>
+      <figure><div class="tile bw tall"><svg class="art lockup" style="aspect-ratio: {{AR_cur-lockup}}"><use href="#cur-lockup"/></svg></div><figcaption class="tag">Huidig · zwart op wit</figcaption></figure>
+      <figure><div class="tile bw tall"><svg class="art lockup" style="aspect-ratio: {{AR_ref-lockup}}"><use href="#ref-lockup"/></svg></div><figcaption class="tag">Verfijnd · zwart op wit</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="w">
+    <h2 id="w">De W</h2>
+    <p>Het haarlijntje van de linker V loopt halverwege de hoogte in de dikke streek van de rechter V en stopt daar, met een zachte boog in de oksel eronder. Er is geen kruis meer en geen dubbele dikte. Bovenin verliest de rechter V de binnenste helft van zijn schreef, zodat het midden van de W ademt in plaats van twee schreven tegen elkaar te drukken.</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_CUR_W}}" style="aspect-ratio: {{AR_CUR_W}}"><use href="#raw-cur-wordmark"/></svg></div><figcaption class="tag">Huidig</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_REF_W}}" style="aspect-ratio: {{AR_REF_W}}"><use href="#raw-ref-wordmark"/></svg></div><figcaption class="tag">Verfijnd</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="r">
+    <h2 id="r">De R</h2>
+    <p>De bocht onder de basislijn is ruimer getrokken, waardoor de knik in de buitenrand verdwenen is. De streek wordt pas na de bocht dun en loopt uit in een fijne punt. De staart eindigt eerder en lager: de kleinste afstand tot de A is van 33 naar 43 eenheden gegaan (kaphoogte 700).</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_CUR_R}}" style="aspect-ratio: {{AR_CUR_R}}"><use href="#raw-cur-wordmark"/></svg></div><figcaption class="tag">Huidig</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_REF_R}}" style="aspect-ratio: {{AR_REF_R}}"><use href="#raw-ref-wordmark"/></svg></div><figcaption class="tag">Verfijnd</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="i">
+    <h2 id="i">Het saffraanicoon</h2>
+    <p>Terug naar de krokus: drie smalle bladeren die de voet omsluiten, en daaruit de drie draden die saffraan worden, elk met een klein druppeltje. In kleur zijn de draden saffraanrood, in één kleur gaan ze mee met het goud of zwart. Het icoon is ongeveer half zo hoog als de letters en blijft duidelijk ondergeschikt.</p>
+    <div class="three">
+      <figure><div class="tile dark"><svg class="art icon" style="aspect-ratio: {{AR_cur-icon}}"><use href="#cur-icon"/></svg></div><figcaption class="tag">Huidig</figcaption></figure>
+      <figure><div class="tile dark colour"><svg class="art icon" style="aspect-ratio: {{AR_ref-icon}}"><use href="#ref-icon"/></svg></div><figcaption class="tag">Verfijnd · kleur</figcaption></figure>
+      <figure><div class="tile bw"><svg class="art icon" style="aspect-ratio: {{AR_ref-icon}}"><use href="#ref-icon"/></svg></div><figcaption class="tag">Verfijnd · één kleur</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="l">
+    <h2 id="l">Lockup</h2>
+    <figure><div class="tile dark big colour"><svg class="art" style="aspect-ratio: {{AR_ref-lockup}}"><use href="#ref-lockup"/></svg></div><figcaption class="tag">RAWZA · Afghaans restaurant</figcaption></figure>
+    <figure>
+      <div class="tile dark sizes colour">
+        <figure><svg class="art" style="width:240px;aspect-ratio: {{AR_ref-wordmark}}"><use href="#ref-wordmark"/></svg><span class="cap">240 px</span></figure>
+        <figure><svg class="art" style="width:150px;aspect-ratio: {{AR_ref-wordmark}}"><use href="#ref-wordmark"/></svg><span class="cap">150 px</span></figure>
+        <figure><svg class="art" style="width:96px;aspect-ratio: {{AR_ref-wordmark}}"><use href="#ref-wordmark"/></svg><span class="cap">96 px</span></figure>
+        <figure><svg class="art" style="width:64px;aspect-ratio: {{AR_ref-icon}}"><use href="#ref-icon"/></svg><span class="cap">64 px</span></figure>
+        <figure><svg class="art" style="width:32px;aspect-ratio: {{AR_ref-icon}}"><use href="#ref-icon"/></svg><span class="cap">32 px</span></figure>
+      </div>
+      <figcaption class="cap">Kleine maten, op echte pixelbreedte</figcaption>
+    </figure>
+  </section>
+
+  <section class="section" aria-labelledby="n">
+    <h2 id="n">Eerlijk bekeken</h2>
+    <ul class="changes">
+      <li>De W heeft nu een eigen detail dat je bij geen standaard-Garamond ziet. Het is rustig en blijft leesbaar.</li>
+      <li>De R is fijner en eindigt rustiger, en blijft ruim vrij van de A. Onder ongeveer 150 px verdwijnt de haarlijn nog steeds.</li>
+      <li>Het krokusicoon is herkenbaarder als saffraan dan de vorige draden. Op 32 px blijven de rode draden zichtbaar, maar de druppeltjes niet meer.</li>
+      <li>A en Z zijn ongewijzigd. De spatiëring is hetzelfde gebleven, omdat de W even breed is.</li>
+    </ul>
+  </section>
+</div>

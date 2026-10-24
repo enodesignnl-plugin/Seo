@@ -1,0 +1,6 @@
+{
+  "name": "rawza-final-identity",
+  "private": true,
+  "scripts": { "build": "node build.cjs", "study": "node study.cjs" },
+  "dependencies": { "opentype.js": "1.3.4", "paper-jsdom": "0.16.0" }
+}

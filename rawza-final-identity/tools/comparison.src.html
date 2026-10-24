@@ -1,0 +1,267 @@
+<title>RAWZA Identity</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one long sheet on deep chocolate; brand tiles sit on their own grounds (chocolate, cream, white),
+   directions side by side on wide screens, stacked on phones. Single deliberate dark look. */
+:root {
+  --ground: #1b120d;      /* page */
+  --cacao: #2a1a12;       /* chocolate tile */
+  --gold: #cfae6e;        /* soft gold for the marks */
+  --champagne: #eadbb8;   /* text on dark */
+  --cream: #f3ebdd;       /* light tile */
+  --ink: #2a1a12;         /* marks on light */
+  --muted: #a8957a;       /* captions */
+  --line: #3d2b20;        /* hairlines on the page */
+  --white: #ffffff;
+  --black: #000000;
+  --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--champagne); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 48px 96px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 72px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; text-wrap: balance; color: var(--champagne); }
+h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; }
+h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+h3 { font-size: 22px; }
+p { margin: 0; max-width: 64ch; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.cap { font-size: 13px; color: var(--muted); }
+.stack { display: grid; gap: 16px; }
+.section { display: grid; gap: 28px; border-top: 1px solid var(--line); padding-top: 40px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) { .two, .three { grid-template-columns: 1fr; } .four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.tile { display: grid; place-items: center; padding: clamp(20px, 5vw, 56px); min-height: 220px; }
+.tile.dark { background: var(--cacao); color: var(--gold); }
+.tile.light { background: var(--cream); color: var(--ink); }
+.tile.bw { background: var(--white); color: var(--black); }
+.tile.tall { min-height: 340px; }
+svg.art { display: block; width: 100%; height: auto; fill: currentColor; }
+.lockup { max-width: 520px; }
+.wordmark { max-width: 560px; }
+.mono { max-width: 150px; }
+.hero-tile { min-height: 360px; }
+.hero-tile svg.art { max-width: 460px; }
+.why { display: grid; gap: 8px; }
+.why h3 { color: var(--gold); }
+/* small-size test rows: real pixel widths */
+.sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 28px 36px; padding: 28px; }
+.sizes figure { justify-items: start; }
+.sizes .cap { font-variant-numeric: tabular-nums; }
+.closeup { background: var(--cacao); color: var(--gold); padding: 16px; }
+/* applications */
+.menu { aspect-ratio: 3 / 4.2; max-width: 360px; width: 100%; margin: 0 auto; background: var(--cacao); color: var(--gold); display: grid; grid-template-rows: 1fr auto; padding: 48px 40px; position: relative; box-shadow: 0 30px 60px -30px #000; }
+.menu::before { content: ""; position: absolute; inset: 14px; border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); pointer-events: none; }
+.menu .lock { align-self: center; width: 100%; }
+.menu .label { font-family: var(--display); letter-spacing: .5em; text-align: center; font-size: 13px; color: var(--gold); padding-left: .5em; }
+.cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card { aspect-ratio: 85 / 55; width: min(100%, 340px); display: grid; place-items: center; padding: 28px; box-shadow: 0 24px 50px -28px #000; }
+.card.front { background: var(--cream); color: var(--ink); }
+.card.back { background: var(--cacao); color: var(--gold); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: 13px; }
+td.n { text-align: right; white-space: nowrap; }
+.scroll { overflow-x: auto; }
+.qa { display: grid; gap: 14px; }
+.qa div { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 4px 24px; }
+@media (max-width: 700px) { .qa div { grid-template-columns: 1fr; } }
+.qa b { font-weight: 500; color: var(--champagne); }
+.palette { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip i { display: block; width: 72px; height: 44px; border: 1px solid var(--line); }
+</style>
+
+<!--SYMBOLS-->
+
+<div class="wrap">
+  <header class="stack">
+    <div class="eyebrow">Rawza · Afghaans restaurant · merkidentiteit</div>
+    <h1>Twee eindrichtingen, getekend met één pen</h1>
+    <p>Beide richtingen delen één idee: de lettervormen komen uit een breedgepunte pen (de qalam van de Perzische kalligrafie), steeds onder dezelfde hoek van 28°. Die pen tekent de staart van de R, het haarlijntje van de W en het saffraanteken. Zo is het Afghaanse karakter zichtbaar in de lijn zelf, zonder bogen, sterren of ornament.</p>
+  </header>
+
+  <section class="section" aria-labelledby="side">
+    <h2 id="side">Naast elkaar</h2>
+    <div class="two">
+      <figure>
+        <div class="tile dark hero-tile"><svg class="art" style="aspect-ratio: {{AR_direction-a-lockup}}"><use href="#direction-a-lockup"/></svg></div>
+        <div class="why">
+          <h3>A · Royal Signature</h3>
+          <p>Kapitalen in een lichte, klassieke Garamond. De R sluit af met één kalligrafische pennenstreek die onder de A doorloopt. De gekruiste W eindigt in dezelfde pensnede. Erboven staan drie saffraandraden als stil, secundair teken: saffraan uit Herat is een van de bekendste Afghaanse producten.</p>
+        </div>
+      </figure>
+      <figure>
+        <div class="tile dark hero-tile"><svg class="art" style="aspect-ratio: {{AR_direction-b-lockup}}"><use href="#direction-b-lockup"/></svg></div>
+        <div class="why">
+          <h3>B · Warm Editorial</h3>
+          <p>Kleine letters in een zachte, oud-stijl serif met afgeronde schreven en druppelvormige uiteinden, warmer dan een koele mode-Didone. De R draagt de a: het been gaat over in een zwaai die onder de a doorgaat. Het tweede merk is de R zelf.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== A ===================== -->
+  <section class="section" aria-labelledby="a">
+    <div class="stack">
+      <div class="eyebrow">Richting A</div>
+      <h2 id="a">Royal Signature</h2>
+    </div>
+
+    <div class="two">
+      <figure>
+        <div class="closeup"><svg class="art" viewBox="{{CROP_A_R}}" style="aspect-ratio: {{CAR_A_R}}"><use href="#raw-a-wordmark"/></svg></div>
+        <figcaption class="cap">R: het eigen been van de letter loopt over in één pennenstreek. Die is vol op de diagonaal, wordt dunner door de basislijn en eindigt als haarlijn onder de A, met minstens 30 eenheden ruimte (kaphoogte 700).</figcaption>
+      </figure>
+      <figure>
+        <div class="closeup"><svg class="art" viewBox="{{CROP_A_W}}" style="aspect-ratio: {{CAR_A_W}}"><use href="#raw-a-wordmark"/></svg></div>
+        <figcaption class="cap">W: de linker V valt halverwege door de rechter V. Het haarlijntje verliest zijn schreef en eindigt in een snede onder dezelfde penhoek. Daardoor ademt het midden van de W.</figcaption>
+      </figure>
+    </div>
+
+    <div class="two">
+      <figure><div class="tile dark"><svg class="art wordmark" style="aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg></div><figcaption class="cap">Woordmerk (hoofdmerk)</figcaption></figure>
+      <figure><div class="tile dark"><svg class="art mono" style="aspect-ratio: {{AR_direction-a-monogram}}"><use href="#direction-a-monogram"/></svg></div><figcaption class="cap">Secundair teken: drie saffraandraden (stempels), elk één pennenstreek</figcaption></figure>
+      <figure><div class="tile dark"><svg class="art lockup" style="aspect-ratio: {{AR_direction-a-lockup}}"><use href="#direction-a-lockup"/></svg></div><figcaption class="cap">Lockup met AFGHAANS RESTAURANT (gekozen)</figcaption></figure>
+      <figure><div class="tile dark"><svg class="art lockup" style="aspect-ratio: {{AR_a-lockup-short}}"><use href="#a-lockup-short"/></svg></div><figcaption class="cap">Lockup met RESTAURANT</figcaption></figure>
+    </div>
+
+    <div class="three">
+      <figure><div class="tile dark"><svg class="art lockup" style="aspect-ratio: {{AR_direction-a-lockup}}"><use href="#direction-a-lockup"/></svg></div><figcaption class="cap">Goud op chocolade</figcaption></figure>
+      <figure><div class="tile light"><svg class="art lockup" style="aspect-ratio: {{AR_direction-a-lockup}}"><use href="#direction-a-lockup"/></svg></div><figcaption class="cap">Chocolade op crème</figcaption></figure>
+      <figure><div class="tile bw"><svg class="art lockup" style="aspect-ratio: {{AR_direction-a-lockup}}"><use href="#direction-a-lockup"/></svg></div><figcaption class="cap">Zwart op wit</figcaption></figure>
+    </div>
+
+    <figure>
+      <div class="tile dark sizes">
+        <figure><svg class="art" style="width:240px;aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg><span class="cap">240 px</span></figure>
+        <figure><svg class="art" style="width:150px;aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg><span class="cap">150 px</span></figure>
+        <figure><svg class="art" style="width:96px;aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg><span class="cap">96 px</span></figure>
+        <figure><svg class="art" style="width:64px;aspect-ratio: {{AR_direction-a-monogram}}"><use href="#direction-a-monogram"/></svg><span class="cap">64 px</span></figure>
+        <figure><svg class="art" style="width:32px;aspect-ratio: {{AR_direction-a-monogram}}"><use href="#direction-a-monogram"/></svg><span class="cap">32 px</span></figure>
+        <figure><svg class="art" style="width:16px;aspect-ratio: {{AR_direction-a-monogram}}"><use href="#direction-a-monogram"/></svg><span class="cap">16 px</span></figure>
+      </div>
+      <figcaption class="cap">Kleine maten op scherm, op echte pixelbreedte</figcaption>
+    </figure>
+    <figure>
+      <div class="tile bw sizes">
+        <figure><svg class="art" style="width:240px;aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg><span class="cap">240 px</span></figure>
+        <figure><svg class="art" style="width:150px;aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg><span class="cap">150 px</span></figure>
+        <figure><svg class="art" style="width:96px;aspect-ratio: {{AR_direction-a-wordmark}}"><use href="#direction-a-wordmark"/></svg><span class="cap">96 px</span></figure>
+        <figure><svg class="art" style="width:32px;aspect-ratio: {{AR_direction-a-monogram}}"><use href="#direction-a-monogram"/></svg><span class="cap">32 px</span></figure>
+        <figure><svg class="art" style="width:16px;aspect-ratio: {{AR_direction-a-monogram}}"><use href="#direction-a-monogram"/></svg><span class="cap">16 px</span></figure>
+      </div>
+      <figcaption class="cap">Zwart-wittest</figcaption>
+    </figure>
+
+    <figure>
+      <div class="tile light tall">
+        <div class="menu"><div class="lock"><svg class="art" style="aspect-ratio: {{AR_direction-a-lockup}}"><use href="#direction-a-lockup"/></svg></div><div class="label">MENU</div></div>
+      </div>
+      <figcaption class="cap">Toepassing: menukaart, goudfolie op chocolade karton</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== B ===================== -->
+  <section class="section" aria-labelledby="b">
+    <div class="stack">
+      <div class="eyebrow">Richting B</div>
+      <h2 id="b">Warm Editorial</h2>
+    </div>
+
+    <figure>
+      <div class="closeup"><svg class="art" viewBox="{{CROP_B_R}}" style="aspect-ratio: {{CAR_B_R}}; max-width: 620px; margin: 0 auto"><use href="#raw-b-wordmark"/></svg></div>
+      <figcaption class="cap">R–a: het been van de R loopt in één streek door de basislijn en zwaait onder de a door tot een haarlijn. Dat is de verbinding tussen de letters. De pen is even breed als het been waar hij het overneemt, zodat er geen naad is.</figcaption>
+    </figure>
+
+    <div class="two">
+      <figure><div class="tile dark"><svg class="art wordmark" style="aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg></div><figcaption class="cap">Woordmerk (hoofdmerk)</figcaption></figure>
+      <figure><div class="tile dark"><svg class="art mono" style="aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg></div><figcaption class="cap">Monogram: de R met een kortere staart</figcaption></figure>
+      <figure><div class="tile dark"><svg class="art lockup" style="aspect-ratio: {{AR_direction-b-lockup}}"><use href="#direction-b-lockup"/></svg></div><figcaption class="cap">Lockup met AFGHAANS RESTAURANT (gekozen)</figcaption></figure>
+      <figure><div class="tile dark"><svg class="art lockup" style="aspect-ratio: {{AR_b-lockup-short}}"><use href="#b-lockup-short"/></svg></div><figcaption class="cap">Lockup met RESTAURANT</figcaption></figure>
+    </div>
+
+    <div class="three">
+      <figure><div class="tile dark"><svg class="art lockup" style="aspect-ratio: {{AR_direction-b-lockup}}"><use href="#direction-b-lockup"/></svg></div><figcaption class="cap">Goud op chocolade</figcaption></figure>
+      <figure><div class="tile light"><svg class="art lockup" style="aspect-ratio: {{AR_direction-b-lockup}}"><use href="#direction-b-lockup"/></svg></div><figcaption class="cap">Chocolade op crème</figcaption></figure>
+      <figure><div class="tile bw"><svg class="art lockup" style="aspect-ratio: {{AR_direction-b-lockup}}"><use href="#direction-b-lockup"/></svg></div><figcaption class="cap">Zwart op wit</figcaption></figure>
+    </div>
+
+    <figure>
+      <div class="tile dark sizes">
+        <figure><svg class="art" style="width:240px;aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg><span class="cap">240 px</span></figure>
+        <figure><svg class="art" style="width:150px;aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg><span class="cap">150 px</span></figure>
+        <figure><svg class="art" style="width:96px;aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg><span class="cap">96 px</span></figure>
+        <figure><svg class="art" style="width:64px;aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg><span class="cap">64 px</span></figure>
+        <figure><svg class="art" style="width:32px;aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg><span class="cap">32 px</span></figure>
+        <figure><svg class="art" style="width:16px;aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg><span class="cap">16 px</span></figure>
+      </div>
+      <figcaption class="cap">Kleine maten op scherm, op echte pixelbreedte</figcaption>
+    </figure>
+    <figure>
+      <div class="tile bw sizes">
+        <figure><svg class="art" style="width:240px;aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg><span class="cap">240 px</span></figure>
+        <figure><svg class="art" style="width:150px;aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg><span class="cap">150 px</span></figure>
+        <figure><svg class="art" style="width:96px;aspect-ratio: {{AR_direction-b-wordmark}}"><use href="#direction-b-wordmark"/></svg><span class="cap">96 px</span></figure>
+        <figure><svg class="art" style="width:32px;aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg><span class="cap">32 px</span></figure>
+        <figure><svg class="art" style="width:16px;aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg><span class="cap">16 px</span></figure>
+      </div>
+      <figcaption class="cap">Zwart-wittest</figcaption>
+    </figure>
+
+    <figure>
+      <div class="tile light tall">
+        <div class="cards">
+          <div class="card front"><svg class="art" style="max-width: 34%; aspect-ratio: {{AR_direction-b-monogram}}"><use href="#direction-b-monogram"/></svg></div>
+          <div class="card back"><svg class="art" style="max-width: 78%; aspect-ratio: {{AR_direction-b-lockup}}"><use href="#direction-b-lockup"/></svg></div>
+        </div>
+      </div>
+      <figcaption class="cap">Toepassing: visitekaartje, voorkant crème met de R, achterkant goud op chocolade</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== assessment ===================== -->
+  <section class="section" aria-labelledby="check">
+    <h2 id="check">Kritische toets</h2>
+    <p>Elk punt uit de briefing, eerlijk beantwoord. Scores op 10, niet afgerond naar het doel.</p>
+    <div class="qa">
+      <div><b>Onderscheidender dan de vorige RAWZA-versies?</b><span>Ja. Er is nu een systeem: een eigen teken, lockups en kleurversies. De R-staart eindigt als haarlijn in plaats van met een dikke vlek, en de W is gekruist met een eigen pensnede. B is niet langer een koele Bodoni.</span></div>
+      <div><b>Heeft de typografie een eigen identiteit?</b><span>Deels. De R-staart en de W-snede in A zijn eigen, net als de R–a-zwaai in B. De basis is nog herkenbaar als Cormorant Garamond en Fraunces. Onder ongeveer 150 px vallen de eigen details weg en leest A als standaard Cormorant.</span></div>
+      <div><b>Is het teken subtiel en premium?</b><span>Ja. De drie saffraandraden zijn klein en ingetogen, en getekend met dezelfde pen als de letters. In de lockup is het teken bewust bescheiden. Voor favicon en avatar is er een zwaarder gesneden versie zonder steeltje.</span></div>
+      <div><b>Luxe genoeg voor een high-end restaurant?</b><span>A wel: licht, ruim gespatieerd, met één gebaar. B oogt warm en verzorgd, maar eerder als een goede brasserie dan als fine dining. Dat komt door de zachte Fraunces-vormen.</span></div>
+      <div><b>Afghaans zonder cliché?</b><span>A: ja, via saffraan (Herat) en de qalam-hoek. Dat is subtiel en vraagt soms een korte uitleg in het merkverhaal. B: zwak. Alleen de penstreek verwijst ernaar.</span></div>
+      <div><b>Unieker dan een standaard serif-logo?</b><span>A: ja, op groot formaat en met het teken erbij. B: minder. Zonder de R-zwaai is het een nette serif.</span></div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Aspect</th><th class="n">A · Royal Signature</th><th class="n">B · Warm Editorial</th><th>Wat een hogere score tegenhoudt</th></tr></thead>
+        <tbody>
+          <tr><td>Typografische kwaliteit</td><td class="n">8,0</td><td class="n">7,5</td><td>De basis is een bestaand font. De curvespanning is niet met de hand afgewerkt.</td></tr>
+          <tr><td>Originaliteit</td><td class="n">6,5</td><td class="n">6,0</td><td>Twee eigen details per merk. De rest is herkenbaar font.</td></tr>
+          <tr><td>Sierlijkheid</td><td class="n">8,0</td><td class="n">7,0</td><td>B is stevig en zacht, en minder verfijnd.</td></tr>
+          <tr><td>Luxe uitstraling</td><td class="n">8,0</td><td class="n">6,5</td><td>B leest als brasserie, niet als fine dining.</td></tr>
+          <tr><td>Afghaanse herkenbaarheid</td><td class="n">6,5</td><td class="n">5,0</td><td>Saffraan en pen zijn verfijnd, maar niet direct leesbaar zonder verhaal.</td></tr>
+          <tr><td>Toepasbaarheid</td><td class="n">7,5</td><td class="n">8,0</td><td>Bij A verdwijnen de haarlijnen onder 150 px. B blijft goed staan.</td></tr>
+          <tr><td><b>Gewogen</b> (idee 30, samenhang 25, klantfit 20, reproductie 15, vector 10)</td><td class="n"><b>≈ 7,6</b></td><td class="n"><b>≈ 7,0</b></td><td>Vorige ronde: A ≈ 6,9, B ≈ 6,2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Advies: kies A als hoofdrichting. Een 9,5 is hiermee niet bereikt. De volgende stap is handmatige afwerking door een letterontwerper: curvespanning en overshoots, een aparte kleine-maten-versie van het woordmerk en een proefdruk in goudfolie.</p>
+    <div class="stack">
+      <div class="eyebrow">Kleuren</div>
+      <div class="palette">
+        <div class="chip"><i style="background:#2a1a12"></i>Chocolade #2A1A12</div>
+        <div class="chip"><i style="background:#cfae6e"></i>Zacht goud #CFAE6E</div>
+        <div class="chip"><i style="background:#f3ebdd"></i>Crème #F3EBDD</div>
+        <div class="chip"><i style="background:#000000"></i>Zwart #000000</div>
+      </div>
+    </div>
+  </section>
+</div>

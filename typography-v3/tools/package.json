@@ -1,0 +1,6 @@
+{
+  "name": "rawza-typography-v3",
+  "private": true,
+  "scripts": { "build": "node build.cjs" },
+  "dependencies": { "paper-jsdom": "0.16.0" }
+}

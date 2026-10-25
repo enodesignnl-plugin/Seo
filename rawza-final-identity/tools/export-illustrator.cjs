@@ -11,8 +11,21 @@ const path = require('path');
 const opentype = require('opentype.js');
 const { paper, fix, translate } = require('./lib.cjs');
 
-const REL = path.join(__dirname, '..', 'release');
-const OUT = path.join(__dirname, '..', 'illustrator-export', 'SVG');
+// RAWZA_EXPORT=titlecase exports the title-case variant (Rawza) from ../titlecase/source instead
+const TITLE = process.env.RAWZA_EXPORT === 'titlecase';
+const CFG = TITLE ? {
+  src: path.join(__dirname, '..', 'titlecase', 'source'), out: path.join(__dirname, '..', 'titlecase', 'illustrator-export', 'SVG'),
+  prefix: 'RAWZA_Titlecase', name: 'Rawza (title case)', small: false, saffron: false,
+  letters: [['letter-R', 'LETTER_R'], ['letter-a-1', 'LETTER_a_01'], ['letter-w', 'LETTER_w'], ['letter-z', 'LETTER_z'], ['letter-a-2', 'LETTER_a_02']],
+  lockup: (S) => S.Atitle(S.TITLE_LOCK), desc: () => require('./system.cjs').TITLE_LOCK,
+} : {
+  src: path.join(__dirname, '..', 'release'), out: path.join(__dirname, '..', 'illustrator-export', 'SVG'),
+  prefix: 'RAWZA', name: 'RAWZA', small: true, saffron: true,
+  letters: [['letter-R', 'LETTER_R'], ['letter-A-1', 'LETTER_A_01'], ['letter-W', 'LETTER_W'], ['letter-Z', 'LETTER_Z'], ['letter-A-2', 'LETTER_A_02']],
+  lockup: (S) => S.Aref({ preset: S.RELEASE, iconGap: 300, iconScale: 1.08, descTrack: 0.5, descY: 910 }), desc: () => ({ descCap: 80, descTrack: 0.5, descY: 910 }),
+};
+const REL = CFG.src;
+const OUT = CFG.out;
 fs.mkdirSync(OUT, { recursive: true });
 
 // approved colours (release/rawza-lockup-colour.svg and the release notes); nothing new
@@ -73,7 +86,7 @@ ${body}
   fs.writeFileSync(path.join(OUT, file), svg);
 }
 
-const LETTERS = [['letter-R', 'LETTER_R'], ['letter-A-1', 'LETTER_A_01'], ['letter-W', 'LETTER_W'], ['letter-Z', 'LETTER_Z'], ['letter-A-2', 'LETTER_A_02']];
+const LETTERS = CFG.letters;
 const DESC_TEXT = 'AFGHAANS RESTAURANT';
 // colour schemes: [icon leaves, saffron threads, letters, descriptor]
 const SCHEMES = {
@@ -95,7 +108,7 @@ function lockupLayers(src, scheme, o = {}) {
   return layers;
 }
 
-const main = read('rawza-lockup.svg'), small = read('rawza-lockup-small.svg'), wm = read('rawza-wordmark.svg');
+const main = read('rawza-lockup.svg'), small = CFG.small ? read('rawza-lockup-small.svg') : null, wm = read('rawza-wordmark.svg');
 // check the release files agree with each other (same geometry in the colour lockup)
 const mainC = read('rawza-lockup-colour.svg');
 for (const k of Object.keys(main.pieces)) if (main.pieces[k].d !== mainC.pieces[k].d) throw new Error('release lockups differ: ' + k);
@@ -103,14 +116,14 @@ for (const k of Object.keys(main.pieces)) if (main.pieces[k].d !== mainC.pieces[
 const files = [];
 const emit = (f, spec) => { write(f, spec); files.push(f); };
 for (const name of ['Gold', 'Colour', 'Black', 'White']) {
-  emit(`RAWZA_Logo_${name}.svg`, { W: main.W, H: main.H, title: `RAWZA logo, ${name.toLowerCase()}`, note: noteFor(name), layers: lockupLayers(main, SCHEMES[name]) });
+  emit(`${CFG.prefix}_Logo_${name}.svg`, { W: main.W, H: main.H, title: `${CFG.name} logo, ${name.toLowerCase()}`, note: noteFor(name), layers: lockupLayers(main, SCHEMES[name]) });
 }
 for (const name of ['Gold', 'Black']) {
-  emit(`RAWZA_Wordmark_${name}.svg`, { W: wm.W, H: wm.H, title: `RAWZA wordmark, ${name.toLowerCase()}`, note: noteFor(name),
+  emit(`${CFG.prefix}_Wordmark_${name}.svg`, { W: wm.W, H: wm.H, title: `${CFG.name} wordmark, ${name.toLowerCase()}`, note: noteFor(name),
     layers: [{ id: '02_WORDMARK_RAWZA', paths: LETTERS.map(([k, id]) => ({ id, fill: SCHEMES[name][2], d: wm.pieces[k].d })) }] });
 }
 // saffron symbol alone: the icon from the main lockup, moved by a whole-unit offset into its own board
-{
+if (CFG.saffron) {
   const leaves = item(main.pieces.leaves.d), threads = item(trimThreads(main));
   const b = leaves.bounds.unite(threads.bounds), m = 40;
   const dx = Math.round(m - b.x), dy = Math.round(m - b.y);
@@ -123,30 +136,30 @@ for (const name of ['Gold', 'Black']) {
     ] });
   }
 }
-emit('RAWZA_Logo_Small.svg', { W: small.W, H: small.H, title: 'RAWZA logo, small-size variant, black', note: 'For use below about 300 px wide. ' + noteFor('Black'), layers: lockupLayers(small, SCHEMES.Black) });
-emit('RAWZA_Logo_Small_Colour.svg', { W: small.W, H: small.H, title: 'RAWZA logo, small-size variant, colour', note: 'For use below about 300 px wide. ' + noteFor('Colour'), layers: lockupLayers(small, SCHEMES.Colour) });
+if (CFG.small) emit('RAWZA_Logo_Small.svg', { W: small.W, H: small.H, title: 'RAWZA logo, small-size variant, black', note: 'For use below about 300 px wide. ' + noteFor('Black'), layers: lockupLayers(small, SCHEMES.Black) });
+if (CFG.small) emit('RAWZA_Logo_Small_Colour.svg', { W: small.W, H: small.H, title: 'RAWZA logo, small-size variant, colour', note: 'For use below about 300 px wide. ' + noteFor('Colour'), layers: lockupLayers(small, SCHEMES.Colour) });
 // foil: one plate, solid black = the area to be foiled; no overlapping shapes, no tints
-emit('RAWZA_Foil_OneColour.svg', { W: main.W, H: main.H, title: 'RAWZA logo, one-colour foil separation',
+emit(`${CFG.prefix}_Foil_OneColour.svg`, { W: main.W, H: main.H, title: `${CFG.name} logo, one-colour foil separation`,
   note: 'Single plate: every black area is foil. 100 % solid, no tints, no gradients, no overlapping shapes.', layers: lockupLayers(main, SCHEMES.Black) });
 
 // editable descriptor: the same lockup, with the descriptor as live text in the release font,
 // size and tracking, set at the exact origin of the approved outlines
 {
   const S = require('./system.cjs'), { place } = require('./svgout.cjs'), { line } = require('./text.cjs');
-  const LOCK = { iconGap: 300, iconScale: 1.08, descTrack: 0.5, descY: 910 };
-  const r = S.Aref({ preset: S.RELEASE, ...LOCK });
+  const LOCK = CFG.desc();
+  const r = CFG.lockup(S);
   const art = place([{ group: 'a', pieces: r.threads }, { group: 'b', pieces: r.leaves }, { group: 'c', pieces: r.wordmark }, { group: 'd', pieces: r.descriptor }]);
   if (art.W !== main.W || art.H !== main.H) throw new Error('artboard mismatch');
   const regenerated = art.placed.find((g) => g.group === 'd').pieces[0].d;
   if (regenerated !== main.pieces['descriptor-text'].d) throw new Error('descriptor geometry mismatch');
   const font = opentype.loadSync(path.join(__dirname, 'fonts', 'CormorantGaramondV-600.ttf'));
-  const cap = 80, track = 0.5 * cap, size = cap * font.unitsPerEm / font.tables.os2.sCapHeight;
-  const t = line('CormorantGaramondV-600.ttf', DESC_TEXT, { cap, track: 0.5 });
+  const cap = LOCK.descCap, track = LOCK.descTrack * cap, size = cap * font.unitsPerEm / font.tables.os2.sCapHeight;
+  const t = line('CormorantGaramondV-600.ttf', DESC_TEXT, { cap, track: LOCK.descTrack });
   const cx = S.capCentre(r.wordmark);
   const x0 = cx - t.bounds.width / 2 - t.bounds.x + art.dx, base = LOCK.descY + cap + art.dy;
   DESC = { size, track, x0, base, cap };
   const text = (fill) => `<text id="DESCRIPTOR_TEXT" x="${x0.toFixed(2)}" y="${base.toFixed(2)}" fill="${fill}" font-family="Cormorant Garamond, CormorantGaramond-SemiBold, serif" font-weight="600" font-size="${size.toFixed(2)}" letter-spacing="${track.toFixed(2)}" xml:space="preserve">${DESC_TEXT}</text>`;
-  emit('RAWZA_Descriptor_Editable.svg', { W: main.W, H: main.H, title: 'RAWZA logo with editable descriptor text',
+  emit(`${CFG.prefix}_Descriptor_Editable.svg`, { W: main.W, H: main.H, title: `${CFG.name} logo with editable descriptor text`,
     note: 'The descriptor is live text: requires the font Cormorant Garamond SemiBold (SIL OFL 1.1). RAWZA and the symbol are outlines.',
     layers: lockupLayers(main, SCHEMES.Black, { descText: text }) });
 }

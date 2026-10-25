@@ -114,4 +114,21 @@ function Aref(opts = {}) {
   };
 }
 
-module.exports = { A, Aref, REFINED, FINAL_PASS, RELEASE, B, boundsOf, capCentre, SAFFRON, TEXTS };
+// ---- Title-case variant (Rawza): release R + lowercase; the icon centred on the word, its base
+// `iconGap` above the cap line; same descriptor as the release
+function Atitle(opts = {}) {
+  const lower = require('./lower.cjs');
+  const { glyphs, pos } = lower.set(opts.preset);
+  const wm = glyphs.map((g, i) => ({ id: g.id, item: translate(g.shape, pos[i], 0) }));
+  const cx = capCentre(wm);
+  const ic = icon(opts.iconOpts);
+  const k = opts.iconScale ?? 1.08, gap = opts.iconGap ?? 300;
+  const place = (item) => translate(scale(item, k, 0, 0), cx, -gap);
+  const desc = descriptor({ ...DESC.A, cap: opts.descCap ?? 80, track: opts.descTrack ?? 0.5, text: TEXTS.full }, cx, opts.descY ?? 910);
+  return { wordmark: wm, threads: [{ id: 'threads', item: place(ic.threads) }], leaves: [{ id: 'leaves', item: place(ic.leaves) }], descriptor: desc };
+}
+
+// the approved title-case settings (spacing, tail, icon and descriptor)
+const TITLE_LOCK = { preset: { gap: 145, reach: 345 }, iconGap: 170, iconScale: 1.08, descCap: 74, descTrack: 0.46, descY: 910 };
+
+module.exports = { Atitle, TITLE_LOCK, A, Aref, REFINED, FINAL_PASS, RELEASE, B, boundsOf, capCentre, SAFFRON, TEXTS };

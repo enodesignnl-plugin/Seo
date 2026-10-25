@@ -110,7 +110,9 @@ function W(o = {}) {
     const c = g.shape.children ? g.shape.children[0] : g.shape;
     const p0 = nearest(c, 391, 93), p1 = nearest(c, 509, 350);
     const Lx = (y) => p0.x + (p1.x - p0.x) * (y - p0.y) / (p1.y - p0.y);
-    s = sub(s, poly([[Lx(p0.y + 1), p0.y + 1], [Lx(-20), -20], [280, -20], [280, p0.y + 1]]));
+    // o.serif = true cuts along the edge; a number keeps that many units of serif left of it
+    const keep = o.serif === true ? 0 : o.serif;
+    s = sub(s, poly([[Lx(p0.y + 1) - keep, p0.y + 1], [Lx(-20) - keep, -20], [280, -20], [280, p0.y + 1]]));
   }
   return { shape: dropSpecks(s), adv: g.adv };
 }
@@ -128,6 +130,13 @@ function Z(o = {}) {
       const k = w(x);
       return [x, y < 0 ? y * (1 - up * k) : y - down * k * y * (1 - y / 260)];
     });
+  }
+  if (o.foot) {
+    // the beak at the bottom right is drawn down by the same kind of warp: its tip sits `foot`
+    // (a fraction of its height) lower, the bar and the diagonal above y 430 do not move
+    const w = (x) => { const u = Math.min(1, Math.max(0, (x - 480) / 100)); return u * u * (3 - 2 * u); };
+    const g = (y) => { const u = Math.min(1, Math.max(0, (y - 430) / 120)); return u * u * (3 - 2 * u); };
+    s = warp(s, (x, y) => [x, y + o.foot * w(x) * g(y) * (700 - y)]);
   }
   return { shape: dropSpecks(inter(s, rect(-100, -60, 900, 800))), adv: g.adv };
 }

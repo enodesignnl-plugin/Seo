@@ -259,3 +259,47 @@ Alleen W, R en Z zijn aangepast. Icoon, kleuren, typografie, verhoudingen en com
 De SVG's hebben één groep per letter, zonder overlappende contouren en met juist georiënteerde binnenvormen. Ze openen in Inkscape 1.2. Het losse icoon staat ongewijzigd in `refined/`.
 
 Bouwen: `cd tools && node build-final.cjs`.
+
+## 10. Release-ronde (map `release/`)
+
+Laatste gecontroleerde ronde op basis van de eigen audit. `final/` en alle eerdere mappen zijn ongewijzigd. Vergelijking: `release/release.html`.
+
+**Toegepast (elk getest tegen de vorige versie)**
+
+1. **Icoon:** 300 eenheden boven de kaplijn in plaats van 185, en 2 % groter. Op 300 px leest het niet meer als een accent op de W.
+2. **Kerning** bovenop de optische spatiëring:
+   - R–A 16 eenheden krapper;
+   - W–Z 34 eenheden ruimer (schreef en vlag raakten bijna op de kaplijn);
+   - Z–A per saldo 11 eenheden ruimer (snavel en voet aan de basislijn);
+   - A–W ongewijzigd.
+3. **W:** de boog boven de verbinding is 28 eenheden in plaats van 42. De dikke streek zwelt daar niet meer op.
+4. **Z:** de snavel rechtsonder is een derde omlaag gehaald met dezelfde vloeiende vervorming als het vlaggetje. De punt ligt nu ongeveer 105 eenheden boven de basislijn in plaats van 155.
+5. **Ondertitel:** spatiëring 0,50 in plaats van 0,62 × de kaphoogte.
+6. **Saffraankleur:** eerst getest op donkerbruin en op crème. #C9573A in plaats van #B9442C: op donker beter zichtbaar, op crème even goed.
+
+**Getest en niet overgenomen**
+- Een klein stompje schreef op de bijgesneden middenpunt van de W. Dat gaf een inkeping.
+- De Z-snavel 42 % omlaag in plaats van 32 %. Die oogde stomp.
+
+**Kleine-maten-variant** (aparte bestanden, het hoofdlogo is niet aangepast)
+- Cormorant gewicht 500 in plaats van 420.
+- Ruimere spatiëring (gap 262).
+- Kortere R-staart die niet tot niets uitdunt. Afstand tot de A: 30 eenheden.
+- Steviger icoon, 340 eenheden boven de kaplijn.
+- Ondertitel op kaphoogte 118 met spatiëring 0,34.
+- Gebruik onder ongeveer 300 px breed. Onder ongeveer 100 px: alleen het woordmerk.
+
+**Bestanden in `release/`**
+- `rawza-wordmark.svg`
+- `rawza-lockup.svg`
+- `rawza-lockup-colour.svg`
+- `rawza-wordmark-small.svg`
+- `rawza-lockup-small.svg`
+- `rawza-lockup-small-colour.svg`
+- `release.html`
+
+Alle bestanden: één groep per letter, geen overlappende contouren, binnenvormen juist georiënteerd, geopend in Inkscape 1.2. Niet in Illustrator zelf getest.
+
+Bouwen: `cd tools && node build-release.cjs`.
+
+**Eigen oordeel:** ongeveer 8,4 (was ongeveer 8,0). Een 9,5 vraagt handmatige afwerking van curves en overshoots door een letterontwerper en een proefdruk in goudfolie.

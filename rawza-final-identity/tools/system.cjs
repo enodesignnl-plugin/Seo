@@ -88,15 +88,23 @@ const FINAL_PASS = {
   R: { ...REFINED.R, t1: 0.64, end: 0.1, point: [0.86, 0.4] },
   Z: { thin: 10, soft: { up: 0.6, down: 0.55 } },
 };
+// release round: icon higher, W join bracket smaller, Z beak drawn down, optical kerning
+// (R–A tighter, W–Z and Z–A looser), descriptor tracked less
+const RELEASE = {
+  ...FINAL_PASS,
+  extra: [0, 24, 0, 34, 18],
+  W: { pen: false, tuck: { round: 28, flow: [64, 30] }, serif: true },
+  Z: { ...FINAL_PASS.Z, foot: 0.32 },
+};
 function Aref(opts = {}) {
   const wm = wordmark(royal, opts.preset || REFINED);
   const cx = capCentre(wm);
-  const ic = icon();
+  const ic = icon(opts.iconOpts);
   const k = opts.iconScale ?? 1.06, gap = opts.iconGap ?? 185;
   const place = (item) => { const it = scale(item, k, 0, 0); return translate(it, cx, -gap); };
   // icon base sits `gap` above the cap line, centred on the letters
   const leaves = place(ic.leaves), threads = place(ic.threads);
-  const desc = descriptor({ ...DESC.A, cap: 80, track: 0.62, text: TEXTS.full }, cx, opts.descY ?? 905);
+  const desc = descriptor({ ...DESC.A, cap: opts.descCap ?? 80, track: opts.descTrack ?? 0.62, font: opts.descFont ?? DESC.A.font, text: TEXTS.full }, cx, opts.descY ?? 905);
   return {
     wordmark: wm,
     threads: [{ id: 'threads', item: threads }],
@@ -106,4 +114,4 @@ function Aref(opts = {}) {
   };
 }
 
-module.exports = { A, Aref, REFINED, FINAL_PASS, B, boundsOf, capCentre, SAFFRON, TEXTS };
+module.exports = { A, Aref, REFINED, FINAL_PASS, RELEASE, B, boundsOf, capCentre, SAFFRON, TEXTS };

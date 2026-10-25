@@ -1,0 +1,203 @@
+<title>RAWZA Release</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one long sheet on deep chocolate; brand tiles sit on their own grounds (chocolate, cream, white),
+   directions side by side on wide screens, stacked on phones. Single deliberate dark look. */
+:root {
+  --ground: #1b120d;      /* page */
+  --cacao: #2a1a12;       /* chocolate tile */
+  --gold: #cfae6e;        /* soft gold for the marks */
+  --champagne: #eadbb8;   /* text on dark */
+  --cream: #f3ebdd;       /* light tile */
+  --ink: #2a1a12;         /* marks on light */
+  --muted: #a8957a;       /* captions */
+  --line: #3d2b20;        /* hairlines on the page */
+  --white: #ffffff;
+  --black: #000000;
+  --saffron: #b9442c;      /* saffron threads, colour versions only */
+  --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--champagne); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 48px 96px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 72px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; text-wrap: balance; color: var(--champagne); }
+h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; }
+h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+h3 { font-size: 22px; }
+p { margin: 0; max-width: 64ch; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.cap { font-size: 13px; color: var(--muted); }
+.stack { display: grid; gap: 16px; }
+.section { display: grid; gap: 28px; border-top: 1px solid var(--line); padding-top: 40px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) { .two, .three { grid-template-columns: 1fr; } .four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.tile { display: grid; place-items: center; padding: clamp(20px, 5vw, 56px); min-height: 220px; }
+.tile.dark { background: var(--cacao); color: var(--gold); }
+.tile.light { background: var(--cream); color: var(--ink); }
+.tile.bw { background: var(--white); color: var(--black); }
+.tile.tall { min-height: 340px; }
+svg.art { display: block; width: 100%; height: auto; fill: currentColor; }
+.lockup { max-width: 520px; }
+.wordmark { max-width: 560px; }
+.mono { max-width: 150px; }
+.hero-tile { min-height: 360px; }
+.hero-tile svg.art { max-width: 460px; }
+.why { display: grid; gap: 8px; }
+.why h3 { color: var(--gold); }
+/* small-size test rows: real pixel widths */
+.sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 28px 36px; padding: 28px; }
+.sizes figure { justify-items: start; }
+.sizes .cap { font-variant-numeric: tabular-nums; }
+.closeup { background: var(--cacao); color: var(--gold); padding: 16px; }
+/* applications */
+.menu { aspect-ratio: 3 / 4.2; max-width: 360px; width: 100%; margin: 0 auto; background: var(--cacao); color: var(--gold); display: grid; grid-template-rows: 1fr auto; padding: 48px 40px; position: relative; box-shadow: 0 30px 60px -30px #000; }
+.menu::before { content: ""; position: absolute; inset: 14px; border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); pointer-events: none; }
+.menu .lock { align-self: center; width: 100%; }
+.menu .label { font-family: var(--display); letter-spacing: .5em; text-align: center; font-size: 13px; color: var(--gold); padding-left: .5em; }
+.cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card { aspect-ratio: 85 / 55; width: min(100%, 340px); display: grid; place-items: center; padding: 28px; box-shadow: 0 24px 50px -28px #000; }
+.card.front { background: var(--cream); color: var(--ink); }
+.card.back { background: var(--cacao); color: var(--gold); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: 13px; }
+td.n { text-align: right; white-space: nowrap; }
+.scroll { overflow-x: auto; }
+.qa { display: grid; gap: 14px; }
+.qa div { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 4px 24px; }
+@media (max-width: 700px) { .qa div { grid-template-columns: 1fr; } }
+.qa b { font-weight: 500; color: var(--champagne); }
+.palette { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip i { display: block; width: 72px; height: 44px; border: 1px solid var(--line); }
+.colour { --th: var(--saffron); }
+.th-before { --th: {{SAFFRON_BEFORE}}; }
+.th-after { --th: {{SAFFRON}}; }
+.sizes2 { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 24px 32px; padding: 24px; }
+.sizes2 figure { justify-items: start; }
+.stackw { display: grid; gap: 10px; padding: 20px; background: var(--cacao); color: var(--gold); }
+table.k td, table.k th { padding: 6px 10px; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 700px) { .pair { grid-template-columns: 1fr; } }
+.tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.icon { max-width: 140px; }
+.big { min-height: 440px; }
+.big svg.art { max-width: 620px; }
+ul.changes { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; max-width: 70ch; }
+</style>
+
+<!--SYMBOLS-->
+
+<div class="wrap">
+  <header class="stack">
+    <div class="eyebrow">Rawza · final precision round</div>
+    <h1>Release version</h1>
+    <p>Controlled refinement based on the audit. The R, the W connection, the saffron concept and the composition are unchanged in character. Each change below was compared against the previous version and kept only where it improved the result. The previous files in <code>final/</code> are untouched and shown here as "before".</p>
+  </header>
+
+  <section class="section" aria-labelledby="cmp">
+    <h2 id="cmp">Before and after</h2>
+    <div class="pair">
+      <figure><div class="tile dark tall th-before"><svg class="art lockup" style="aspect-ratio: {{AR_b-lockup}}"><use href="#b-lockup"/></svg></div><figcaption class="tag">Before · gold on dark brown</figcaption></figure>
+      <figure><div class="tile dark tall th-after"><svg class="art lockup" style="aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After · gold on dark brown</figcaption></figure>
+      <figure><div class="tile bw tall"><svg class="art lockup" style="aspect-ratio: {{AR_b-lockup}}"><use href="#b-lockup"/></svg></div><figcaption class="tag">Before · black on white</figcaption></figure>
+      <figure><div class="tile bw tall"><svg class="art lockup" style="aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After · black on white</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="icon">
+    <h2 id="icon">1 · Icon no longer reads as an accent</h2>
+    <p>At 300 px the icon sat so close to the W that the word could read as "RAẂZA". It now sits 300 units above the cap line instead of 185 (cap height 700), and is 2 % larger to keep its presence at the greater distance. Shape and colour concept unchanged.</p>
+    <div class="pair">
+      <figure><div class="tile bw"><svg class="art" style="width:300px;aspect-ratio: {{AR_b-lockup}}"><use href="#b-lockup"/></svg></div><figcaption class="tag">Before · 300 px</figcaption></figure>
+      <figure><div class="tile bw"><svg class="art" style="width:300px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After · 300 px</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="kern">
+    <h2 id="kern">2 · Optical kerning</h2>
+    <p>The spacing is still measured optically, with three pair corrections on top. R–A is 16 units tighter, because its open top read wider than the other pairs. W–Z is 34 units looser, because the W's serif and the Z's flag nearly met on the cap line. Z–A is 11 units looser, because the Z's beak and the A's foot crowded each other at the baseline. A–W was already even and is unchanged. Both rows below are at the same scale.</p>
+    <div class="stackw">
+      <svg class="art" style="aspect-ratio: {{AR_b-wordmark}}"><use href="#b-wordmark"/></svg>
+      <span class="cap">Before</span>
+      <svg class="art" style="aspect-ratio: {{AR_a-wordmark}}"><use href="#a-wordmark"/></svg>
+      <span class="cap">After</span>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="w">
+    <h2 id="w">3 · W join without the swelling</h2>
+    <p>The bracket above the join is now 28 units instead of 42, so the heavy stroke no longer swells where the hairline enters it. The crotch below is unchanged. I also tested giving the trimmed inner serif a small stub, but it left a notch at the top and made it worse, so that change was dropped.</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_B_W}}" style="aspect-ratio: {{AR_B_W}}"><use href="#raw-b-wordmark"/></svg></div><figcaption class="tag">Before</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_A_W}}" style="aspect-ratio: {{AR_A_W}}"><use href="#raw-a-wordmark"/></svg></div><figcaption class="tag">After</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="z">
+    <h2 id="z">4 · Z beak in the same language as its flag</h2>
+    <p>The beak at the bottom right stood 155 units tall and angular next to the softened flag. It is now drawn down by a third with the same smooth warp, so its tip sits about 105 units above the baseline. The bar and the diagonal do not move. A stronger setting, 42 %, made the beak look stubby and was not kept.</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_B_Z}}" style="aspect-ratio: {{AR_B_Z}}"><use href="#raw-b-wordmark"/></svg></div><figcaption class="tag">Before</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_A_Z}}" style="aspect-ratio: {{AR_A_Z}}"><use href="#raw-a-wordmark"/></svg></div><figcaption class="tag">After</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="desc">
+    <h2 id="desc">7 · Descriptor</h2>
+    <p>The letter-spacing of AFGHAANS RESTAURANT went from 0.62 to 0.50 of its cap height, so it reads as one line rather than separate letters. It is still slightly narrower than the wordmark and keeps the same font and weight. You can see the result in the lockups above.</p>
+  </section>
+
+  <section class="section" aria-labelledby="col">
+    <h2 id="col">6 · Saffron colour, tested before changing</h2>
+    <p>The threads are thin, so their colour carries little area. On dark brown the original red (#B9442C) read almost as a dark line. One step lighter and warmer (#C9573A) lifts the threads without making them louder. On cream both work, so the lighter value is used everywhere.</p>
+    <div class="pair">
+      <figure><div class="tile dark th-before"><svg class="art" style="width:min(100%,420px);aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">Before colour {{SAFFRON_BEFORE}}</figcaption></figure>
+      <figure><div class="tile dark th-after"><svg class="art" style="width:min(100%,420px);aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After colour {{SAFFRON}}</figcaption></figure>
+      <figure><div class="tile light th-before"><svg class="art" style="width:min(100%,420px);aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">Before colour on cream</figcaption></figure>
+      <figure><div class="tile light th-after"><svg class="art" style="width:min(100%,420px);aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After colour on cream</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="small">
+    <h2 id="small">5 · Small-size variant (separate files)</h2>
+    <p>The main logo is not changed for small sizes. Below about 300 px wide, use the small-size variant instead. It has:</p>
+    <ul class="changes">
+      <li>a heavier weight (500 instead of 420);</li>
+      <li>wider letter-spacing;</li>
+      <li>a shorter R tail that stays visible instead of thinning to nothing;</li>
+      <li>a bolder icon;</li>
+      <li>a larger descriptor.</li>
+    </ul>
+    <p>Below about 100 px, use the wordmark without the descriptor.</p>
+    <figure><div class="tile bw sizes2"><figure><svg class="art" style="width:300px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">300 px</span></figure><figure><svg class="art" style="width:200px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">200 px</span></figure><figure><svg class="art" style="width:140px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">140 px</span></figure><figure><svg class="art" style="width:100px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">100 px</span></figure></div><figcaption class="tag">Main logo</figcaption></figure>
+    <figure><div class="tile bw sizes2"><figure><svg class="art" style="width:300px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">300 px</span></figure><figure><svg class="art" style="width:200px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">200 px</span></figure><figure><svg class="art" style="width:140px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">140 px</span></figure><figure><svg class="art" style="width:100px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">100 px</span></figure></div><figcaption class="tag">Small-size variant</figcaption></figure>
+    <figure><div class="tile dark sizes2 th-after"><figure><svg class="art" style="width:300px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">300 px</span></figure><figure><svg class="art" style="width:200px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">200 px</span></figure><figure><svg class="art" style="width:140px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">140 px</span></figure><figure><svg class="art" style="width:100px;aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg><span class="cap">100 px</span></figure></div><figcaption class="tag">Main logo · gold</figcaption></figure>
+    <figure><div class="tile dark sizes2 th-after"><figure><svg class="art" style="width:300px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">300 px</span></figure><figure><svg class="art" style="width:200px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">200 px</span></figure><figure><svg class="art" style="width:140px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">140 px</span></figure><figure><svg class="art" style="width:100px;aspect-ratio: {{AR_s-lockup}}"><use href="#s-lockup"/></svg><span class="cap">100 px</span></figure></div><figcaption class="tag">Small-size variant · gold</figcaption></figure>
+  </section>
+
+  <section class="section" aria-labelledby="n">
+    <h2 id="n">Critical assessment</h2>
+    <ul class="changes">
+      <li>The icon no longer reads as an accent at 300 px. Of the changes in this round, this one made the biggest difference.</li>
+      <li>The spacing, the W join and the Z beak are visible improvements, but small ones. The character of the logo has not changed.</li>
+      <li>The small-size variant holds the descriptor and the R tail down to about 140 px. The main logo stays light and refined at large sizes.</li>
+      <li>Still not perfect:
+        <ul class="changes">
+          <li>The icon sits above the W because the W is the centre of the word. With the larger gap that reads as intentional, but it still draws the eye to the W.</li>
+          <li>The curves come from code and have not been finished by hand.</li>
+          <li>The outlines have not been opened in Illustrator itself; they have been checked in Inkscape.</li>
+        </ul>
+      </li>
+      <li>My score: about 8.4 out of 10, up from about 8.0. A 9.5 needs a type designer to finish the curves and overshoots by hand, and a printed gold-foil proof.</li>
+    </ul>
+  </section>
+</div>

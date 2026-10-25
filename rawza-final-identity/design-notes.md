@@ -230,3 +230,32 @@ Bouwen: `cd tools && node build-refined.cjs`.
 - De W heeft nu een eigen, rustig detail.
 - De R is fijner en blijft ruim vrij van de A.
 - Onder ongeveer 150 px vallen de R-haarlijn en de saffraandraden nog steeds weg. Een kleine-maten-versie blijft een volgende stap.
+
+## 9. Final precision pass (map `final/`)
+
+Alleen W, R en Z zijn aangepast. Icoon, kleuren, typografie, verhoudingen en compositie zijn die van de verfijningsronde. `refined/` blijft ongewijzigd als "voor"-versie op `final/final-pass.html`.
+
+**W**
+- Het haarlijntje loopt nog steeds halverwege de hoogte in de dikke streek, maar stopt er niet meer met een harde hoek tegenaan.
+- Boven de verbinding zit een lange zachte boog van 42 eenheden langs beide randen.
+- In de oksel eronder loopt de boog 64 eenheden langs het haarlijntje en 30 langs de dikke streek. De kleine knoop van de vorige versie is daarmee weg.
+- Een fout uit de vorige ronde is meteen hersteld: de half weggenomen schreef bovenin wordt nu op de rand van het font zelf gemeten, niet op de aangepaste contour.
+
+**R**
+- Het pad van de zwaai is hetzelfde gebleven.
+- Alleen het verloop van de dikte is aangepast: de streek wordt nu tot aan het eind geleidelijk dunner (t1 0,64 in plaats van 0,5, eind 0,10) en eindigt in een fijnere punt.
+- Afstand tot de A: ongewijzigd, 43 eenheden.
+
+**Z**
+- Het vlaggetje linksboven is met een vloeiende vervorming ingetrokken: het steekt 60 % minder boven de kaplijn uit en hangt 55 % minder ver onder de balk. De rondingen blijven heel.
+- De diagonaal is 4 eenheden lichter (10 in plaats van 6 ten opzichte van het font).
+
+**Bestanden in `final/`**
+- `rawza-wordmark.svg`
+- `rawza-lockup.svg`
+- `rawza-lockup-colour.svg`
+- `final-pass.html`
+
+De SVG's hebben één groep per letter, zonder overlappende contouren en met juist georiënteerde binnenvormen. Ze openen in Inkscape 1.2. Het losse icoon staat ongewijzigd in `refined/`.
+
+Bouwen: `cd tools && node build-final.cjs`.

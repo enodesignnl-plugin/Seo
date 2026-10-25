@@ -80,8 +80,16 @@ const REFINED = {
   W: { pen: false, tuck: { r: [0, 20] }, serif: true },
   R: { dip: 62, lift: 30, t0: 0.3, t1: 0.5, end: 0.12, point: [0.82, 0.3], smooth: true, turn: 55, turnC: 20, turnE: 30 },
 };
+// final precision pass: W join with long soft brackets, R tapering continuously to the end,
+// Z flag drawn in and diagonal 4 units lighter
+const FINAL_PASS = {
+  ...REFINED,
+  W: { pen: false, tuck: { round: 42, flow: [64, 30] }, serif: true },
+  R: { ...REFINED.R, t1: 0.64, end: 0.1, point: [0.86, 0.4] },
+  Z: { thin: 10, soft: { up: 0.6, down: 0.55 } },
+};
 function Aref(opts = {}) {
-  const wm = wordmark(royal, REFINED);
+  const wm = wordmark(royal, opts.preset || REFINED);
   const cx = capCentre(wm);
   const ic = icon();
   const k = opts.iconScale ?? 1.06, gap = opts.iconGap ?? 185;
@@ -98,4 +106,4 @@ function Aref(opts = {}) {
   };
 }
 
-module.exports = { A, Aref, REFINED, B, boundsOf, capCentre, SAFFRON, TEXTS };
+module.exports = { A, Aref, REFINED, FINAL_PASS, B, boundsOf, capCentre, SAFFRON, TEXTS };

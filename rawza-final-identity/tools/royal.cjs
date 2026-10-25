@@ -13,7 +13,7 @@
 const { paper, poly, rect, union, sub, inter, translate, fillet, along } = require('./lib.cjs');
 const { loadFont } = require('./glyphs.cjs');
 const { space } = require('./spacing.cjs');
-const { thinDiagonal, dropSpecks } = require('./edit.cjs');
+const { thinDiagonal, dropSpecks, warp } = require('./edit.cjs');
 const { stroke } = require('./qalam.cjs');
 
 const F = loadFont(`CormorantGaramondV-${process.env.RAWZA_A_WGHT || 420}.ttf`);
@@ -93,11 +93,21 @@ function W(o = {}) {
       if (r1) s = union([s, fillet(C1, along(C1, L0, r1), along(C1, H1, r1))]);
       if (r2) s = union([s, fillet(C2, along(C2, H2, r2), along(C2, B2, r2))]);
     }
+    // final pass: both corners where the hairline meets the heavy stroke are filled with long, soft
+    // brackets, `round` units along each edge above the join, `flow` units (along the hairline,
+    // along the heavy stroke) in the crotch below, so the hairline runs into the stroke instead of
+    // stopping against it
+    if (o.tuck.round || o.tuck.flow) {
+      const C1 = pt(509, 350), C2 = pt(523, 381), H1 = pt(410, 597), H2 = pt(398, 699), B2 = pt(670, 699);
+      if (o.tuck.round) s = union([s, fillet(C1, along(C1, L0, o.tuck.round), along(C1, H1, o.tuck.round))]);
+      if (o.tuck.flow) s = union([s, fillet(C2, along(C2, H2, o.tuck.flow[0]), along(C2, B2, o.tuck.flow[1]))]);
+    }
   }
   if (o.serif) {
     // the right V's heavy stroke loses the inner half of its serif: its left edge runs straight up
     // to the cap line, so the two serifs in the middle of the W no longer crowd each other
-    const c = s.children ? s.children[0] : s;
+    // (edge read from the font's own outline: the join brackets above change the outline here)
+    const c = g.shape.children ? g.shape.children[0] : g.shape;
     const p0 = nearest(c, 391, 93), p1 = nearest(c, 509, 350);
     const Lx = (y) => p0.x + (p1.x - p0.x) * (y - p0.y) / (p1.y - p0.y);
     s = sub(s, poly([[Lx(p0.y + 1), p0.y + 1], [Lx(-20), -20], [280, -20], [280, p0.y + 1]]));
@@ -107,7 +117,18 @@ function W(o = {}) {
 
 function Z(o = {}) {
   const g = F.glyph('Z');
-  const s = o.thin ? thinDiagonal(g.shape, { t: o.thin, r: 9, top: 0, inset: 9 }) : g.shape;
+  let s = o.thin ? thinDiagonal(g.shape, { t: o.thin, r: 9, top: 0, inset: 9 }) : g.shape;
+  if (o.soft) {
+    // the flag at the top left is drawn in: it rises less above the cap line (by `up`) and hangs
+    // less far below the bar (by `down`); the bar itself, from x 260 on, does not move
+    const { up = 0.5, down = 0.6 } = o.soft;
+    const w = (x) => { const u = Math.min(1, Math.max(0, (260 - x) / 110)); return u * u * (3 - 2 * u); };
+    s = warp(s, (x, y) => {
+      if (y > 260) return [x, y];
+      const k = w(x);
+      return [x, y < 0 ? y * (1 - up * k) : y - down * k * y * (1 - y / 260)];
+    });
+  }
   return { shape: dropSpecks(inter(s, rect(-100, -60, 900, 800))), adv: g.adv };
 }
 

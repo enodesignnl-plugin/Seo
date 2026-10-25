@@ -1,0 +1,141 @@
+<title>RAWZA Final Pass</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one long sheet on deep chocolate; brand tiles sit on their own grounds (chocolate, cream, white),
+   directions side by side on wide screens, stacked on phones. Single deliberate dark look. */
+:root {
+  --ground: #1b120d;      /* page */
+  --cacao: #2a1a12;       /* chocolate tile */
+  --gold: #cfae6e;        /* soft gold for the marks */
+  --champagne: #eadbb8;   /* text on dark */
+  --cream: #f3ebdd;       /* light tile */
+  --ink: #2a1a12;         /* marks on light */
+  --muted: #a8957a;       /* captions */
+  --line: #3d2b20;        /* hairlines on the page */
+  --white: #ffffff;
+  --black: #000000;
+  --saffron: #b9442c;      /* saffron threads, colour versions only */
+  --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--champagne); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 48px 96px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 72px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; margin: 0; text-wrap: balance; color: var(--champagne); }
+h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; }
+h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+h3 { font-size: 22px; }
+p { margin: 0; max-width: 64ch; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.cap { font-size: 13px; color: var(--muted); }
+.stack { display: grid; gap: 16px; }
+.section { display: grid; gap: 28px; border-top: 1px solid var(--line); padding-top: 40px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) { .two, .three { grid-template-columns: 1fr; } .four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.tile { display: grid; place-items: center; padding: clamp(20px, 5vw, 56px); min-height: 220px; }
+.tile.dark { background: var(--cacao); color: var(--gold); }
+.tile.light { background: var(--cream); color: var(--ink); }
+.tile.bw { background: var(--white); color: var(--black); }
+.tile.tall { min-height: 340px; }
+svg.art { display: block; width: 100%; height: auto; fill: currentColor; }
+.lockup { max-width: 520px; }
+.wordmark { max-width: 560px; }
+.mono { max-width: 150px; }
+.hero-tile { min-height: 360px; }
+.hero-tile svg.art { max-width: 460px; }
+.why { display: grid; gap: 8px; }
+.why h3 { color: var(--gold); }
+/* small-size test rows: real pixel widths */
+.sizes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 28px 36px; padding: 28px; }
+.sizes figure { justify-items: start; }
+.sizes .cap { font-variant-numeric: tabular-nums; }
+.closeup { background: var(--cacao); color: var(--gold); padding: 16px; }
+/* applications */
+.menu { aspect-ratio: 3 / 4.2; max-width: 360px; width: 100%; margin: 0 auto; background: var(--cacao); color: var(--gold); display: grid; grid-template-rows: 1fr auto; padding: 48px 40px; position: relative; box-shadow: 0 30px 60px -30px #000; }
+.menu::before { content: ""; position: absolute; inset: 14px; border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); pointer-events: none; }
+.menu .lock { align-self: center; width: 100%; }
+.menu .label { font-family: var(--display); letter-spacing: .5em; text-align: center; font-size: 13px; color: var(--gold); padding-left: .5em; }
+.cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card { aspect-ratio: 85 / 55; width: min(100%, 340px); display: grid; place-items: center; padding: 28px; box-shadow: 0 24px 50px -28px #000; }
+.card.front { background: var(--cream); color: var(--ink); }
+.card.back { background: var(--cacao); color: var(--gold); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: 13px; }
+td.n { text-align: right; white-space: nowrap; }
+.scroll { overflow-x: auto; }
+.qa { display: grid; gap: 14px; }
+.qa div { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 4px 24px; }
+@media (max-width: 700px) { .qa div { grid-template-columns: 1fr; } }
+.qa b { font-weight: 500; color: var(--champagne); }
+.palette { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+.chip i { display: block; width: 72px; height: 44px; border: 1px solid var(--line); }
+.colour { --th: var(--saffron); }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 700px) { .pair { grid-template-columns: 1fr; } }
+.tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.icon { max-width: 140px; }
+.big { min-height: 440px; }
+.big svg.art { max-width: 620px; }
+ul.changes { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; max-width: 70ch; }
+</style>
+
+<!--SYMBOLS-->
+
+<div class="wrap">
+  <header class="stack">
+    <div class="eyebrow">Rawza · final precision pass</div>
+    <h1>W, R and Z, refined</h1>
+    <p>No new concept. Three details are refined: the join in the W, the curve and taper of the R's leg, and the flag at the top left of the Z. The saffron icon, colours, typography, proportions and composition stay as they were.</p>
+  </header>
+
+  <section class="section" aria-labelledby="cmp">
+    <h2 id="cmp">Before and after</h2>
+    <div class="pair">
+      <figure><div class="tile dark tall colour"><svg class="art lockup" style="aspect-ratio: {{AR_b-lockup}}"><use href="#b-lockup"/></svg></div><figcaption class="tag">Before · gold on dark brown</figcaption></figure>
+      <figure><div class="tile dark tall colour"><svg class="art lockup" style="aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After · gold on dark brown</figcaption></figure>
+      <figure><div class="tile bw tall"><svg class="art lockup" style="aspect-ratio: {{AR_b-lockup}}"><use href="#b-lockup"/></svg></div><figcaption class="tag">Before · black on white</figcaption></figure>
+      <figure><div class="tile bw tall"><svg class="art lockup" style="aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">After · black on white</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="w">
+    <h2 id="w">W</h2>
+    <p>The hairline still runs into the heavy stroke at mid-height, but it no longer stops against it at a hard corner. Above the join a long, soft bracket carries the hairline's edge into the stroke, and below it the crotch opens along the hairline instead of closing in a small knot. There is still no crossing and no doubled weight.</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_B_W}}" style="aspect-ratio: {{AR_B_W}}"><use href="#raw-b-wordmark"/></svg></div><figcaption class="tag">Before</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_A_W}}" style="aspect-ratio: {{AR_A_W}}"><use href="#raw-a-wordmark"/></svg></div><figcaption class="tag">After</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="r">
+    <h2 id="r">R</h2>
+    <p>The sweep keeps its path; only its weight changes. Before, the stroke dropped to a hairline quickly and then ran at one width. Now it thins continuously all the way to the end and finishes in a finer point. The distance to the A is unchanged at 43 units (cap height 700).</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_B_R}}" style="aspect-ratio: {{AR_B_R}}"><use href="#raw-b-wordmark"/></svg></div><figcaption class="tag">Before</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_A_R}}" style="aspect-ratio: {{AR_A_R}}"><use href="#raw-a-wordmark"/></svg></div><figcaption class="tag">After</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="z">
+    <h2 id="z">Z</h2>
+    <p>The flag at the top left rises less above the cap line and hangs less far below the bar, with its curves kept intact. The diagonal is 4 units lighter, so the Z no longer reads as the darkest letter next to the A and W.</p>
+    <div class="pair">
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_B_Z}}" style="aspect-ratio: {{AR_B_Z}}"><use href="#raw-b-wordmark"/></svg></div><figcaption class="tag">Before</figcaption></figure>
+      <figure><div class="closeup"><svg class="art" viewBox="{{VB_A_Z}}" style="aspect-ratio: {{AR_A_Z}}"><use href="#raw-a-wordmark"/></svg></div><figcaption class="tag">After</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="l">
+    <h2 id="l">Final lockup</h2>
+    <figure><div class="tile dark big colour"><svg class="art" style="aspect-ratio: {{AR_a-lockup}}"><use href="#a-lockup"/></svg></div><figcaption class="tag">RAWZA · Afghaans restaurant</figcaption></figure>
+  </section>
+</div>

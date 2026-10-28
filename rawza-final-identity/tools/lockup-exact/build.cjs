@@ -5,7 +5,8 @@
 //         (fitword2.py), optical spacing made equal (spacing.py)
 //   descriptor: Montserrat 550, size, baseline and tracking fitted (fitdesc.py), uniform tracking
 // Then the spacing rules: icon -> AWZA gap equals AWZA -> descriptor gap, descriptor ends flush with
-// the last A, icon centred on the full word, whole lockup centred on the square.
+// the last A, icon at its horizontal place in the reference (6.6 px right of the centre of the word, as the
+// client chose), whole lockup centred on the square.
 // Rebuild (from this folder; CG/MS = the variable fonts in ../../round-2/lettertypen):
 //   python3 -m fontTools varLib.instancer $CG wght=500 -o fonts/CormorantGaramond-500.ttf
 //   python3 -m fontTools varLib.instancer $MS wght=550 -o fonts/Montserrat-550.ttf
@@ -67,9 +68,7 @@ desc.translate(P(letters[3].bounds.right - desc.bounds.right, 0));
 const G = (report.ref.iconToWord + report.ref.wordToDesc) / 2;
 icon.translate(P(0, word.top - G - icon.bounds.bottom));
 desc.translate(P(0, word.bottom + G - desc.bounds.top));
-// 3. icon centred on the whole word RAWZA
-const full = bb([r, ...letters]);
-icon.translate(P(full.center.x - J('icon.json').axis, 0));
+// 3. icon: stays at its x in the reference (its axis at 628.5, the word's centre at 621.9)
 // 4. lockup centred on the 1254 square
 const all = bb([icon, r, ...letters, desc]);
 const shift = P(627 - all.center.x, 627 - all.center.y);

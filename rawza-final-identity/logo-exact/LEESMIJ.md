@@ -52,7 +52,7 @@ Een pixel in je afbeelding is in Illustrator één px.
 
 - **Toren → RAWZA = RAWZA → ondertitel: 42,3 px.** Gemeten tussen de kaders van de vormen, zoals Illustrator ze toont. In je afbeelding was dat 43,5 en 41,1 px.
 - **Letterafstanden A–W–Z–A optisch gelijk.** In je afbeelding stonden de A en de W dichter op elkaar dan W–Z en Z–A. Daarom staat de W nu 6,5 px en de Z 3,5 px naar rechts. Het wit tussen de letters is gelijk gemeten, niet de kaders: bij schuine letters zoals A en W zouden gelijke kaderafstanden er juist ongelijk uitzien.
-- **De toren staat precies gecentreerd boven het hele woord RAWZA.** Het midden van de toren valt samen met het midden van het woord, van het begin van de R tot het eind van de laatste A. In je afbeelding stond de toren 6,5 px rechts van dat midden.
+- **De toren staat op precies dezelfde horizontale plek als in je afbeelding.** Dat is 6,6 px rechts van het midden van het woord RAWZA, gemeten van het begin van de R tot het eind van de laatste A.
 - **De ondertitel eindigt precies onder het eind van de laatste A.** In je afbeelding was dat 1 px ernaast.
 - **Het hele logo staat in het midden van het vierkant.**
 

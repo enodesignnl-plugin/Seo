@@ -1,0 +1,7 @@
+t.npy
+icon_bw.pbm
+icon_trace.svg
+fonts/
+__pycache__/
+_*.svg
+_*.png

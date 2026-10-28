@@ -1,0 +1,32 @@
+{
+ "font": "../../round-2/lettertypen/Cormorant_Garamond/CormorantGaramond[wght].ttf",
+ "wght": 500.0,
+ "em": 216.0,
+ "baseline": 755.95,
+ "letters": [
+  {
+   "ch": "A",
+   "stretch": 1.057,
+   "x": 373.727,
+   "iou": 0.8397
+  },
+  {
+   "ch": "W",
+   "stretch": 1.0501,
+   "x": 531.434,
+   "iou": 0.7853
+  },
+  {
+   "ch": "Z",
+   "stretch": 1.149,
+   "x": 741.461,
+   "iou": 0.878
+  },
+  {
+   "ch": "A",
+   "stretch": 1.0541,
+   "x": 894.006,
+   "iou": 0.8415
+  }
+ ]
+}

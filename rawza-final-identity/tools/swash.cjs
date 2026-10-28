@@ -63,8 +63,25 @@ const DEF = {
   leg: [[5, 500], [300, 585], [660, 880], [990, 1160], [1250, 1390], [1480, 1468], [1690, 1466], [1900, 1462], [2110, 1410], [2245, 1368]],
   legThick: 96,
 };
+// cut the start of a cubic chain at the first point where x reaches `x` (the curve itself is kept:
+// the first segment is split with de Casteljau's construction)
+function trimStartX(pts, x) {
+  const [p0, p1, p2, p3] = pts.slice(0, 4);
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 50; i++) { const m = (lo + hi) / 2; if (bez(p0, p1, p2, p3, m)[0] < x) lo = m; else hi = m; }
+  const t = (lo + hi) / 2, L = (a, b) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  const a = L(p0, p1), b = L(p1, p2), c = L(p2, p3), d = L(a, b), e = L(b, c), f = L(d, e);
+  return [f, e, c, p3, ...pts.slice(4)];
+}
+// the client's shorter version: the entry hairline starts above the stem, the tail stops under the
+// start of the descriptor
+const SHORT = {
+  bowlStartX: -170,
+  leg: [[5, 500], [300, 585], [660, 880], [990, 1160], [1210, 1360], [1400, 1450], [1560, 1458], [1640, 1460], [1700, 1446], [1760, 1424]],
+};
 function R(opts = {}) {
   const o = { ...DEF, ...opts };
+  if (o.bowlStartX != null) o.bowl = trimStartX(o.bowl, o.bowlStartX);
   const bowl = pen(o.bowl, { hair: o.hair, thick: o.thick, p: 1.6, envelope: env(0.06, 0.93, 0.3, 0.2) });
   // the stem is drawn as a contour: a crescent from a fine point at the top to a rounded end
   const stem = shape(o.stemPath).reorient(true, true);
@@ -93,4 +110,4 @@ function lockup(opts = {}) {
   }
   return out;
 }
-module.exports = { R, pen, sample, env, DEF, LOCK, lockup };
+module.exports = { R, pen, sample, env, DEF, SHORT, LOCK, lockup, trimStartX };

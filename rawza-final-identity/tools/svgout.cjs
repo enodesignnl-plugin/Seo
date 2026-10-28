@@ -19,7 +19,9 @@ function inspect(item) {
   for (const k of kids) {
     anchors += k.segments.length;
     selfX += k.getIntersections().filter((c) => !c.isTouching()).length;
-    const host = kids.find((o) => o !== k && o.bounds.contains(k.bounds) && o.contains(k.interiorPoint));
+    // the innermost contour around this one (shapes can nest: a counter can hold an island)
+    const host = kids.filter((o) => o !== k && o.bounds.contains(k.bounds) && o.contains(k.interiorPoint))
+      .sort((a, b) => Math.abs(a.area) - Math.abs(b.area))[0];
     if (host && host.clockwise === k.clockwise) windingOk = false;
   }
   return { subpaths: kids.length, anchors, selfX, windingOk };

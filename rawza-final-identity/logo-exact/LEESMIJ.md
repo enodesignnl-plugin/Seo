@@ -18,7 +18,7 @@ Versies:
 - **Goud_Op_Chocolade_Vierkant**: precies zoals je afbeelding, met hetzelfde vierkante formaat en bruine vlak (1254 × 1254 px).
 - **Goud_Op_Chocolade**: hetzelfde, strak bijgesneden.
 - **Vrijstaand, zonder achtergrond:**
-  - Goud_Referentie `#EDBD76` (het goud uit je afbeelding)
+  - Goud_Referentie: de kleuren uit je afbeelding, letters `#EDBD76` en toren `#DBA667`
   - Goud `#D6B583` (huisstijl)
   - Chocolade `#2A1A12`
   - Zwart
@@ -73,7 +73,15 @@ Hoe kleiner en dunner de letters, hoe lager dit getal: de randen in je afbeeldin
 
 ## Goed om te weten
 
-- In je afbeelding is de toren iets donkerder goud dan de letters. Hier hebben alle onderdelen één kleur.
+- Kleuren gemeten in je afbeelding (mediaan van de pixels binnen elke vorm):
+
+  | Onderdeel | HEX | RGB |
+  |---|---|---|
+  | Achtergrond | `#29170D` | 41, 23, 13 |
+  | Letters RAWZA en ondertitel | `#EDBD76` | 237, 189, 118 |
+  | Toren met bloem | `#DBA667` | 219, 166, 103 |
+
+  De versies Goud_Op_Chocolade, Goud_Op_Chocolade_Vierkant en Goud_Referentie gebruiken precies deze kleuren. In de overige versies (Goud, Chocolade, Zwart, Wit) heeft het hele logo één kleur.
 - Je afbeelding is 1254 px. Heel fijne details, zoals de dikte van de haarlijnen en de puntjes van de blaadjes, zijn daarom een beste schatting.
 - Ik heb de bestanden niet in Illustrator zelf kunnen openen. Wel is gecontroleerd dat elke SVG geldig is en alleen gesloten paden met een vaste kleur bevat.
 - Opnieuw bouwen: zie `tools/lockup-exact/build.cjs`.

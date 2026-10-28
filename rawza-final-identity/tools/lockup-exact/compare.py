@@ -31,7 +31,7 @@ for k,d in parts.items():
 open(os.path.join(HERE,'compare.txt'),'w').write('\n'.join(lines)+'\n'); print('\n'.join(lines))
 # sheet
 S=3
-fill=''.join(f'<path fill="#EDBD76" d="{d}"/>' for d in parts.values())
+fill=''.join(f'<path fill="{"#DBA667" if k=="toren" else "#EDBD76"}" d="{d}"/>' for k,d in parts.items())
 vec=render(f'<rect x="-50" y="-50" width="{N+100}" height="{N+100}" fill="#29170D"/>'+fill,'_fill',S)
 line=render(''.join(f'<g transform="translate({off[k][0]} {off[k][1]})"><path fill="none" stroke="#3FE0FF" stroke-width="0.7" d="{d}"/></g>' for k,d in parts.items()),'_line',S)
 src=Image.open(os.path.join(HERE,'referentie.jpg')).convert('RGBA').resize((N*S,N*S),Image.BICUBIC)

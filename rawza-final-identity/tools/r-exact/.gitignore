@@ -1,0 +1,8 @@
+# intermediate results of the trace (rebuilt by the scripts)
+alpha.npy
+lab.npy
+strokes.json
+cmp.svg
+cmp.png
+diff.png
+__pycache__/

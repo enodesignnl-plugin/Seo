@@ -4,7 +4,7 @@ Dit is de ronde na de feedback van de klant.
 
 ## Wat er veranderd is
 
-- **De swash-R is ingekort**, in twee stappen. Na "kan die nog iets korter?" stopt de staart eerder en hoger (preset `SHORT`); `L1_Swash_ExtraKort` (preset `SHORTER`) laat de kortste stap zien.
+- **De swash-R is ingekort**, in twee stappen. Na "kan die nog iets korter?" stopt de staart eerder en hoger (preset `SHORT`); `L1_Swash_ExtraKort` (preset `SHORTER`) laat de kortste stap zien. Daarna is de staart verfijnd: hij loopt geleidelijk uit tot een fijne punt (`TAIL` in `swash.cjs`).
 - **AFGHAANS RESTAURANT is groter en dikker.**
   - Lettertype: Montserrat SemiBold (600).
   - Kapitaalhoogte: 112 (was 100).

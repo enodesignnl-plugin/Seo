@@ -80,15 +80,20 @@ const SHORT_V1 = {
   bowlStartX: -170,
   leg: [[5, 500], [300, 585], [660, 880], [990, 1160], [1210, 1360], [1400, 1450], [1560, 1458], [1640, 1460], [1700, 1446], [1760, 1424]],
 };
-// round 2, after "can it be a little shorter?": the tail ends about 180 units earlier and higher
+// round 2, after "can it be a little shorter?": the tail ends about 180 units earlier and higher.
+// After "let it run out more beautifully": the tail keeps some weight through the bottom curve
+// (legHair) and the envelope thins it continuously from the middle of the stroke to a fine point,
+// so it fades out instead of stopping
+// (the extra weight is added only from the middle of the leg on, so the leg's start stays as drawn)
+const TAIL = { legEnv: [0.18, 0.45, 0.25, 0, 1, 0.9], legBias: [0.35, 0.6, 37] };
 const SHORT = {
-  bowlStartX: -120,
-  leg: [[5, 500], [300, 585], [640, 870], [930, 1120], [1100, 1260], [1260, 1350], [1400, 1365], [1470, 1370], [1530, 1358], [1580, 1340]],
+  bowlStartX: -120, ...TAIL,
+  leg: [[5, 500], [300, 585], [640, 870], [930, 1120], [1080, 1250], [1220, 1335], [1370, 1362], [1480, 1376], [1600, 1352], [1720, 1300]],
 };
 // the shortest step shown alongside
 const SHORTER = {
-  bowlStartX: -80,
-  leg: [[5, 500], [300, 585], [620, 860], [860, 1070], [1000, 1190], [1130, 1270], [1250, 1290], [1310, 1295], [1370, 1285], [1420, 1268]],
+  bowlStartX: -80, ...TAIL,
+  leg: [[5, 500], [300, 585], [620, 860], [860, 1070], [990, 1190], [1110, 1265], [1230, 1290], [1320, 1300], [1420, 1282], [1520, 1240]],
 };
 function R(opts = {}) {
   const o = { ...DEF, ...opts };
@@ -96,7 +101,10 @@ function R(opts = {}) {
   const bowl = pen(o.bowl, { hair: o.hair, thick: o.thick, p: 1.6, envelope: env(0.06, 0.93, 0.3, 0.2) });
   // the stem is drawn as a contour: a crescent from a fine point at the top to a rounded end
   const stem = shape(o.stemPath).reorient(true, true);
-  const leg = pen(o.leg, { hair: o.hair, thick: o.legThick, p: 0.9, envelope: env(0.18, 0.88, 0.25, 0.1) });
+  const le = o.legEnv || [0.18, 0.88, 0.25, 0.1, 1, 1];
+  // legBias [t0, t1, w]: extra weight rising smoothly from 0 at t0 to w at t1 and kept to the end
+  const lb = o.legBias, bias = lb ? (t) => lb[2] * smooth((t - lb[0]) / (lb[1] - lb[0])) : () => 0;
+  const leg = pen(o.leg, { hair: o.legHair ?? o.hair, thick: o.legThick, p: 0.9, envelope: env(...le), bias });
   return { shape: dropSpecks(union([bowl, stem, leg])), parts: { bowl, stem, leg } };
 }
 
@@ -121,4 +129,4 @@ function lockup(opts = {}) {
   }
   return out;
 }
-module.exports = { R, pen, sample, env, DEF, SHORT, SHORT_V1, SHORTER, LOCK, lockup, trimStartX };
+module.exports = { R, pen, sample, env, DEF, SHORT, SHORT_V1, SHORTER, TAIL, LOCK, lockup, trimStartX };

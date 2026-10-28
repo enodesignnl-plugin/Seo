@@ -94,7 +94,7 @@ function classic(o = {}) {
 function titlecase(o = {}) {
   const G = require('./garden.cjs');
   const { glyphs, pos } = G.set();
-  const r = SW.R({ ...SW.SHORT, leg: [[5, 500], [300, 585], [600, 860], [900, 1080], [1100, 1220], [1300, 1290], [1450, 1300], [1530, 1300], [1600, 1290], [1660, 1272]] }).shape;
+  const r = SW.R({ ...SW.SHORT, leg: [[5, 500], [300, 585], [600, 860], [900, 1080], [1060, 1205], [1240, 1285], [1400, 1300], [1520, 1306], [1640, 1286], [1760, 1240]] }).shape;
   const shift = (o.xa ?? 780) - (pos[1] + glyphs[1].shape.bounds.x);
   const wm = [{ id: 'letter-R', item: r }, ...glyphs.slice(1).map((g, i) => ({ id: g.id, item: translate(g.shape, pos[i + 1] + shift, 0) }))];
   // the shorter word leaves no room beside the tail: the tail underlines the word and the

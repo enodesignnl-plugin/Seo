@@ -125,7 +125,7 @@ code { color: var(--gold); font-size: 12px; word-break: break-all; }
       <figure><div class="panel light">${logo('L1_Swash', 'Ronde 2: korter')}</div><figcaption>Nu: korter</figcaption></figure>
       <figure><div class="panel light">${logo('L1_Swash_ExtraKort', 'Ronde 2: extra kort')}</div><figcaption>Extra kort</figcaption></figure>
     </div>
-    <p>De staart stopt nu eerder en hoger, en de aanloop begint dichter bij de schacht. De versie "Nu: korter" is de nieuwe standaard in alle varianten hieronder. "Extra kort" laat zien hoe ver het nog kan; daar wordt de swash al bijna een gewone R. AFGHAANS RESTAURANT staat groter en in een zwaardere letter.</p>
+    <p>De staart stopt nu eerder en hoger, en de aanloop begint dichter bij de schacht. De staart loopt nu geleidelijk uit: hij houdt zijn gewicht in de onderste bocht en wordt daarna langzaam dunner tot een fijne punt, in plaats van af te breken. De versie "Nu: korter" is de nieuwe standaard in alle varianten hieronder. "Extra kort" laat zien hoe ver het nog kan; daar wordt de swash al bijna een gewone R. AFGHAANS RESTAURANT staat groter en in een zwaardere letter.</p>
   </section>
 
   <section class="part" aria-labelledby="h-l">

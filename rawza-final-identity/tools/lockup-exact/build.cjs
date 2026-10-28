@@ -32,7 +32,7 @@ const glyphShape = (font, ch, size, x, y, sx = 1) => {
 const r = new paper.CompoundPath({ pathData: J('r.json').d, insert: false });
 const icon = new paper.CompoundPath({ pathData: J('icon.json').d, insert: false });
 
-// letters at their places in the reference (the client's choice), not the equalised spacing of spacing.py
+// letters at their places in the reference (the client's choice), not with equalised spacing
 const W = J('word_fit.json');
 const ZBOX = [754.8, 874.9];   // the reference Z, left and right edge
 const cg = opentype.loadSync(path.join(__dirname, 'fonts', 'CormorantGaramond-500.ttf'));
@@ -82,8 +82,7 @@ for (const it of [icon, r, ...letters, desc]) it.translate(shift);
 
 report.final = { gap: G, iconToWord: bb(letters).top - icon.bounds.bottom, wordToDesc: desc.bounds.top - bb(letters).bottom,
   iconCentre: icon.bounds.center.x, wordCentre: bb([r, ...letters]).center.x, descRight: desc.bounds.right,
-  aRight: letters[3].bounds.right, lockup: bb([icon, r, ...letters, desc]).toString(), shift: shift.toString(),
-  letterGapsFromSpacing: 'see spacing.py' };
+  aRight: letters[3].bounds.right, lockup: bb([icon, r, ...letters, desc]).toString(), shift: shift.toString() };
 console.log(JSON.stringify(report, null, 1));
 const out = { icon: fix(icon.pathData, 3), r: fix(r.pathData, 3), letters: letters.map((l, i) => ({ ch: W.letters[i].ch, d: fix(l.pathData, 3) })),
   desc: fix(desc.pathData, 3), shift: [shift.x, shift.y] };

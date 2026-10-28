@@ -36,7 +36,7 @@ function fitDescriptor(text, R, right, y, o = {}) {
   return { item, track, dy, clearance: d };
 }
 // the swash wordmark with the short R
-function swashWord() { return SW.lockup({ R: SW.SHORT, text: false }).wordmark; }
+function swashWord(R = SW.SHORT) { return SW.lockup({ R, text: false }).wordmark; }
 // symbols, each centred on x = 0 with its base at y = 0
 const SYM = {
   lancet: () => { const m = L.lancet(); return union([m.left, m.right]); },
@@ -70,7 +70,7 @@ const place = (item, cx, bottom, k = 1) => { const s = scale(item, k, 0, 0); ret
 
 // 1 — swash, short: descriptor nested over the tail, right-aligned under AWZA
 function swash(o = {}) {
-  const wm = swashWord();
+  const wm = swashWord(o.R);
   const fit = fitDescriptor(TEXT[o.text || 'full'], wm[0].item, wm[4].item.bounds.right - (o.inset ?? 60), o.descY ?? 1010, o);
   const out = [{ group: 'wordmark', pieces: wm }, { group: 'descriptor', pieces: [{ id: 'descriptor', item: fit.item }] }];
   out.fit = fit;

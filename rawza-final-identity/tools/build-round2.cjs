@@ -16,6 +16,7 @@ const SCHEME = { Gold: [C.Gold, C.Gold], Chocolate: [C.Chocolate, C.Chocolate], 
 
 const LOGOS = {
   L1_Swash: { title: 'Swash R, kort, AFGHAANS RESTAURANT', groups: () => R2.swash(), schemes: ['Gold', 'Chocolate', 'Black', 'White'] },
+  L1_Swash_ExtraKort: { title: 'Swash R, extra kort, AFGHAANS RESTAURANT', groups: () => R2.swash({ R: SW.SHORTER }), schemes: ['Gold', 'Chocolate'] },
   L1_Swash_Restaurant: { title: 'Swash R, kort, RESTAURANT', groups: () => R2.swash({ text: 'short' }), schemes: ['Gold', 'Chocolate'] },
   L2_Swash_Boog: { title: 'Swash R met boog en rozet', groups: () => R2.swash({ symbol: 'archRosette', symScale: 0.85 }), schemes: ['Gold', 'Chocolate', 'GoldLapis', 'ChocolateLapis'] },
   L3_Swash_Lancet: { title: 'Swash R met Lancet', groups: () => R2.swash({ symbol: 'lancet', symScale: 0.36, symGap: 190 }), schemes: ['Gold', 'Chocolate'] },
@@ -68,6 +69,12 @@ for (const [name, m] of Object.entries(SYMBOLS)) {
   const before = SW.lockup({ text: 'AFGHAANS RESTAURANT', descCap: 100, descTrack: 0.5, descInset: 120 });
   const art = place([{ group: 'wordmark', pieces: before.wordmark }, { group: 'descriptor', pieces: before.descriptor }], { margin: 80 });
   json.before = { W: art.W, H: art.H, groups: art.placed };
+}
+// the first round 2 length, for the comparison
+{
+  const g = R2.swash({ R: SW.SHORT_V1 });
+  const art = place(g, { margin: 80 });
+  json.v1 = { W: art.W, H: art.H, groups: art.placed };
 }
 // the three round 1 leaf marks, for the symbol overview
 json.leaf = Object.fromEntries(['lancet', 'interlace', 'contrast'].map((k) => {

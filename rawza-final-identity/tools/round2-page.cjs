@@ -10,13 +10,13 @@ const defs = [
   ...Object.entries(J.logos).map(([k, a]) => g(`l-${k}`, a)),
   ...Object.entries(J.symbols).map(([k, a]) => g(`s-${k}`, a)),
   ...Object.entries(J.leaf).map(([k, a]) => g(`f-${k}`, a)),
-  g('before', J.before),
+  g('before', J.before), g('v1', J.v1),
 ].join('');
 const use = (id, a, label, extra = '') => `<svg class="art" viewBox="0 0 ${a.W} ${a.H}" role="img" aria-label="${label}"${extra}><use href="#${id}"/></svg>`;
 const logo = (k, label, cls = '') => use(`l-${k}`, J.logos[k], label, cls ? ` class="art ${cls}"` : '');
 
 const LOGOS = [
-  ['L1_Swash', 'L1', 'Swash-R, ingekort', 'De sierlijke R met een kortere aanloop en een kortere staart, zoals in het voorbeeld. AFGHAANS RESTAURANT staat groter en in een zwaardere letter (Montserrat SemiBold), boven de staart.', 'L1_Swash_Restaurant'],
+  ['L1_Swash', 'L1', 'Swash-R, ingekort', 'De sierlijke R met een kortere aanloop en een kortere staart. AFGHAANS RESTAURANT staat groter en in een zwaardere letter (Montserrat SemiBold), boven de staart.', 'L1_Swash_Restaurant'],
   ['L2_Swash_Boog', 'L2', 'Swash-R met boog en rozet', 'Dezelfde R met daarboven het boogkader uit jullie voorbeeldlogo, hier met een achtbladige rozet. De rozet kan in goud of in lapis-blauw: lapis lazuli komt van oudsher uit Badakhshan, Afghanistan.', null, true],
   ['L3_Swash_Lancet', 'L3', 'Swash-R met bladsymbool', 'De R met het Lancet-symbool uit ronde 1 erboven: twee bladeren die samen een spitsboog vormen.'],
   ['L4_Klassiek_Boog', 'L4', 'Klassiek met boog', 'In de lijn van jullie eerste voorbeeldlogo: boog met rozet boven RAWZA in klassieke kapitalen, ondertitel gecentreerd eronder.', 'L4_Klassiek_Boog_Restaurant', true],
@@ -83,8 +83,11 @@ section.part { display: grid; gap: 22px; }
 .light { background: var(--cream); color: var(--ink); }
 .lapis { --acc: var(--lapis); }
 .art { display: block; width: 100%; height: auto; max-width: 100%; fill: currentColor; }
-.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 12px; }
-.compare figure { margin: 0; display: grid; gap: 8px; }
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+.compare figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+.compare .panel { aspect-ratio: 2.35 / 1; padding: 5% 6%; }
+.compare .panel .art { width: 100%; height: 100%; }
 .compare figcaption { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-dim); }
 .grid { display: grid; gap: 16px; }
 .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -107,7 +110,7 @@ code { color: var(--gold); font-size: 12px; word-break: break-all; }
     <div class="eyebrow">Rawza · Afghaans restaurant · ronde 2</div>
     <h1>Logo's en symbolen, ronde 2</h1>
     <ul class="changes">
-      <li>De sierlijke R is ingekort: de aanloop linksboven en de staart rechtsonder zijn korter, zoals in jullie voorbeeld.</li>
+      <li>De sierlijke R is ingekort: de aanloop linksboven en de staart rechtsonder zijn korter dan in jullie voorbeeld, met een extra korte versie ter vergelijking.</li>
       <li>AFGHAANS RESTAURANT staat groter en in een zwaardere letter, voor betere leesbaarheid.</li>
       <li>Vijf logovarianten: in de stijl van de swash-R en in de stijl van jullie eerdere voorbeeldlogo.</li>
       <li>Vier nieuwe symbolen naast de drie bladsymbolen van ronde 1.</li>
@@ -116,11 +119,13 @@ code { color: var(--gold); font-size: 12px; word-break: break-all; }
 
   <section class="part" aria-labelledby="h-r">
     <h2 id="h-r">De R, korter</h2>
-    <div class="compare">
+    <div class="compare c3">
       <figure><div class="panel light">${use('before', J.before, 'Ronde 1: lange R')}</div><figcaption>Ronde 1</figcaption></figure>
-      <figure><div class="panel light">${logo('L1_Swash', 'Ronde 2: ingekorte R, grotere ondertitel')}</div><figcaption>Ronde 2: korter, ondertitel groter en dikker</figcaption></figure>
+      <figure><div class="panel light">${use('v1', J.v1, 'Ronde 2, eerste versie')}</div><figcaption>Ronde 2, eerste versie</figcaption></figure>
+      <figure><div class="panel light">${logo('L1_Swash', 'Ronde 2: korter')}</div><figcaption>Nu: korter</figcaption></figure>
+      <figure><div class="panel light">${logo('L1_Swash_ExtraKort', 'Ronde 2: extra kort')}</div><figcaption>Extra kort</figcaption></figure>
     </div>
-    <p>De aanloop begint nu boven de schacht in plaats van ver links, en de staart stopt onder het begin van de ondertitel. De vorm van de R zelf is gelijk gebleven.</p>
+    <p>De staart stopt nu eerder en hoger, en de aanloop begint dichter bij de schacht. De versie "Nu: korter" is de nieuwe standaard in alle varianten hieronder. "Extra kort" laat zien hoe ver het nog kan; daar wordt de swash al bijna een gewone R. AFGHAANS RESTAURANT staat groter en in een zwaardere letter.</p>
   </section>
 
   <section class="part" aria-labelledby="h-l">

@@ -75,9 +75,20 @@ function trimStartX(pts, x) {
 }
 // the client's shorter version: the entry hairline starts above the stem, the tail stops under the
 // start of the descriptor
-const SHORT = {
+// (round 2, first version)
+const SHORT_V1 = {
   bowlStartX: -170,
   leg: [[5, 500], [300, 585], [660, 880], [990, 1160], [1210, 1360], [1400, 1450], [1560, 1458], [1640, 1460], [1700, 1446], [1760, 1424]],
+};
+// round 2, after "can it be a little shorter?": the tail ends about 180 units earlier and higher
+const SHORT = {
+  bowlStartX: -120,
+  leg: [[5, 500], [300, 585], [640, 870], [930, 1120], [1100, 1260], [1260, 1350], [1400, 1365], [1470, 1370], [1530, 1358], [1580, 1340]],
+};
+// the shortest step shown alongside
+const SHORTER = {
+  bowlStartX: -80,
+  leg: [[5, 500], [300, 585], [620, 860], [860, 1070], [1000, 1190], [1130, 1270], [1250, 1290], [1310, 1295], [1370, 1285], [1420, 1268]],
 };
 function R(opts = {}) {
   const o = { ...DEF, ...opts };
@@ -110,4 +121,4 @@ function lockup(opts = {}) {
   }
   return out;
 }
-module.exports = { R, pen, sample, env, DEF, SHORT, LOCK, lockup, trimStartX };
+module.exports = { R, pen, sample, env, DEF, SHORT, SHORT_V1, SHORTER, LOCK, lockup, trimStartX };

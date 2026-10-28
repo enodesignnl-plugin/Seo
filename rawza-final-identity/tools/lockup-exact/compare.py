@@ -38,6 +38,6 @@ src=Image.open(os.path.join(HERE,'referentie.jpg')).convert('RGBA').resize((N*S,
 crop=(175*S,395*S,1075*S,860*S)
 pw,ph=crop[2]-crop[0],crop[3]-crop[1]; out=Image.new('RGB',(pw+40,ph*3+3*70+20),(245,240,232)); dr=ImageDraw.Draw(out)
 f=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',40)
-for i,(p,tt) in enumerate([(src,'Referentie (jouw afbeelding)'),(vec,'Vector (nieuw, afstanden gelijk, toren op zijn plek uit je afbeelding)'),(Image.alpha_composite(src,line),'Vormcontrole: elke vectorvorm als contour op zijn plek in de referentie')]):
+for i,(p,tt) in enumerate([(src,'Referentie (jouw afbeelding)'),(vec,'Vector (nieuw, alles op zijn plek uit je afbeelding)'),(Image.alpha_composite(src,line),'Vormcontrole: elke vectorvorm als contour op zijn plek in de referentie')]):
     y=20+i*(ph+70); dr.text((20,y),tt,fill=(42,26,18),font=f); out.paste(p.crop(crop).convert('RGB'),(20,y+55))
 out.save(os.path.join(D,'RAWZA_Logo_Exact_Vergelijking.png'))

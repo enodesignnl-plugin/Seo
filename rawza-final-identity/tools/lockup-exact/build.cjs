@@ -1,8 +1,8 @@
 // The full reference lockup (tower with flower, RAWZA with the swash R, AFGHAANS RESTAURANT) as clean
 // vector paths, in reference-image pixel units (1254 x 1254).   node build.cjs -> lockup.json
 //   R: ../r-exact (placed by place_r.cjs)            icon: traced and mirrored (icon.py, icon.cjs)
-//   AWZA: Cormorant Garamond 500 (W and Z as in glyphs.cjs), size and stretch fitted per letter
-//         (fitword2.py), optical spacing made equal (spacing.py)
+//   AWZA: Cormorant Garamond 500 (W and Z as in glyphs.cjs), size, stretch and place fitted per
+//         letter (fitword2.py), at the reference's own letter spacing
 //   descriptor: Montserrat 550, size, baseline and tracking fitted (fitdesc.py), uniform tracking
 // Then the spacing rules: icon -> AWZA gap equals AWZA -> descriptor gap, descriptor ends flush with
 // the last A, icon at its horizontal place in the reference (6.6 px right of the centre of the word, as the
@@ -12,7 +12,7 @@
 //   python3 -m fontTools varLib.instancer $MS wght=550 -o fonts/Montserrat-550.ttf
 //   python3 coverage.py && python3 icon.py && potrace icon_bw.pbm -s -a 1.1 -O 0.6 -t 50 -o icon_trace.svg
 //   AXIS=628.5 node icon.cjs icon_trace.svg icon.json && node place_r.cjs r.json
-//   python3 fitword.py $CG 500 && python3 fitword2.py $CG 500 216 755.95 && python3 spacing.py
+//   python3 fitword.py $CG 500 && python3 fitword2.py $CG 500 216 755.95
 //   python3 fitdesc.py $MS 550 34.6 822.2 save
 //   node build.cjs && node export.cjs && python3 compare.py   (then PDF/PNG with Inkscape)
 const fs = require('fs');
@@ -32,14 +32,20 @@ const glyphShape = (font, ch, size, x, y, sx = 1) => {
 const r = new paper.CompoundPath({ pathData: J('r.json').d, insert: false });
 const icon = new paper.CompoundPath({ pathData: J('icon.json').d, insert: false });
 
-const W = J('word_fit.json'), wx = J('word_x.json');
+// letters at their places in the reference (the client's choice), not the equalised spacing of spacing.py
+const W = J('word_fit.json');
+const ZBOX = [754.8, 874.9];   // the reference Z, left and right edge
 const cg = opentype.loadSync(path.join(__dirname, 'fonts', 'CormorantGaramond-500.ttf'));
 // both As share one stretch, so they are the same letter
 const aStretch = (W.letters[0].stretch + W.letters[3].stretch) / 2;
 const { glyph } = require('./glyphs.cjs');
 const letters = W.letters.map((L, i) => {
   const s = glyph(cg, L.ch); s.scale(W.em / cg.unitsPerEm * (L.ch === 'A' ? aStretch : L.stretch), W.em / cg.unitsPerEm, P(0, 0));
-  s.translate(P(wx[i], W.baseline)); return s;
+  s.translate(P(W.letters[i].x, W.baseline));
+  if (L.ch === 'Z') {   // Z: its outline matched to the reference Z's left and right edges
+    const b = s.bounds; s.scale((ZBOX[1] - ZBOX[0]) / b.width, 1, P(b.left, 0)); s.translate(P(ZBOX[0] - b.left, 0));
+  }
+  return s;
 });
 
 const D = J('desc_fit.json');

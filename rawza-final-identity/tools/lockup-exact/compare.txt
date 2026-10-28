@@ -1,7 +1,7 @@
 toren met bloem      vorm 92.6%   verschoven -0.0 px horizontaal, +1.0 px verticaal
 sierlijke R          vorm 93.5%   verschoven -0.0 px horizontaal, -0.0 px verticaal
 A                    vorm 88.8%   verschoven -0.0 px horizontaal, -0.0 px verticaal
-W                    vorm 83.8%   verschoven +6.5 px horizontaal, +0.5 px verticaal
-Z                    vorm 87.5%   verschoven +3.5 px horizontaal, -0.0 px verticaal
+W                    vorm 83.7%   verschoven -0.0 px horizontaal, +0.5 px verticaal
+Z                    vorm 88.8%   verschoven -0.0 px horizontaal, -0.0 px verticaal
 laatste A            vorm 89.1%   verschoven -0.0 px horizontaal, -0.0 px verticaal
 AFGHAANS RESTAURANT  vorm 80.1%   verschoven -1.0 px horizontaal, +1.0 px verticaal

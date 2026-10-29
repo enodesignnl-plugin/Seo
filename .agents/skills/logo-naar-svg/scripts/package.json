@@ -1,0 +1,6 @@
+{
+  "name": "logo-naar-svg-scripts",
+  "private": true,
+  "description": "Node helpers for the logo-naar-svg skill (outline booleans and font outlines)",
+  "dependencies": { "opentype.js": "1.3.4", "paper-jsdom": "0.16.0" }
+}

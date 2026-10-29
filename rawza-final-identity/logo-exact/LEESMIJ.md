@@ -15,14 +15,14 @@ Het bestaat uit de toren met de bloem, RAWZA met de sierlijke R en AFGHAANS REST
 
 Versies:
 
-- **Goud_Op_Chocolade_Vierkant**: precies zoals je afbeelding, met hetzelfde vierkante formaat en bruine vlak (1254 × 1254 px).
+- **Goud_Op_Chocolade_Vierkant**: het logo in goud `#C9A063` op het bruine vlak `#29170D`, in hetzelfde vierkante formaat als je afbeelding (1254 × 1254 px).
 - **Goud_Op_Chocolade**: hetzelfde, strak bijgesneden.
 - **Vrijstaand, zonder achtergrond:**
-  - Goud_Referentie: de kleuren uit je afbeelding, letters `#EDBD76` en toren `#DBA667`
-  - Goud `#D6B583` (huisstijl)
+  - Goud `#C9A063`
   - Chocolade `#2A1A12`
   - Zwart
   - Wit
+- **Voorbeeldkleuren** en **Voorbeeldkleuren_Op_Chocolade_Vierkant**: precies de kleuren uit je afbeelding, ter vergelijking. De letters zijn `#EDBD76`, de toren `#DBA667`.
 
 Lagen in elk bestand:
 
@@ -73,15 +73,23 @@ Hoe kleiner en dunner de letters, hoe lager dit getal: de randen in je afbeeldin
 
 ## Goed om te weten
 
-- Kleuren gemeten in je afbeelding (mediaan van de pixels binnen elke vorm):
+- **Kleuren**
 
-  | Onderdeel | HEX | RGB |
-  |---|---|---|
-  | Achtergrond | `#29170D` | 41, 23, 13 |
-  | Letters RAWZA en ondertitel | `#EDBD76` | 237, 189, 118 |
-  | Toren met bloem | `#DBA667` | 219, 166, 103 |
+  | Kleur | HEX | RGB | Gebruik |
+  |---|---|---|---|
+  | **Goud** | `#C9A063` | 201, 160, 99 | **Het hele logo, in één kleur** |
+  | Chocolade (achtergrond) | `#29170D` | 41, 23, 13 | Het bruine vlak, zoals in je afbeelding |
+  | Chocolade (logo) | `#2A1A12` | 42, 26, 18 | Het logo in bruin op een lichte ondergrond |
+  | Voorbeeld: letters | `#EDBD76` | 237, 189, 118 | Alleen in de versies Voorbeeldkleuren |
+  | Voorbeeld: toren | `#DBA667` | 219, 166, 103 | Alleen in de versies Voorbeeldkleuren |
 
-  De versies Goud_Op_Chocolade, Goud_Op_Chocolade_Vierkant en Goud_Referentie gebruiken precies deze kleuren. In de overige versies (Goud, Chocolade, Zwart, Wit) heeft het hele logo één kleur.
+  De voorbeeldkleuren zijn gemeten in je afbeelding, als de middelste waarde van de pixels binnen elke vorm.
+
+  Het goud `#C9A063` heeft dezelfde tint als je afbeelding, maar is minder fel en iets donkerder. Daardoor oogt het als goud in plaats van geel.
+- **Drukwerk**
+  - Gedrukt wordt goud met gewone inkt snel mosterdgeel.
+  - Voor echte glans: vraag de drukker om goudfolie (folieprint) of een metallic goud, bijvoorbeeld Pantone 871 C.
+  - CMYK-waarden kun je het beste door de drukker laten omzetten met zijn eigen profiel.
 - Je afbeelding is 1254 px. Heel fijne details, zoals de dikte van de haarlijnen en de puntjes van de blaadjes, zijn daarom een beste schatting.
 - Ik heb de bestanden niet in Illustrator zelf kunnen openen. Wel is gecontroleerd dat elke SVG geldig is en alleen gesloten paden met een vaste kleur bevat.
 - Opnieuw bouwen: zie `tools/lockup-exact/build.cjs`.

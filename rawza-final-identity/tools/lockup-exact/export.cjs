@@ -6,7 +6,9 @@ const { paper, fix } = require('../lib.cjs');
 const OUT = path.join(__dirname, '..', '..', 'logo-exact', 'SVG');
 fs.mkdirSync(OUT, { recursive: true });
 const L = JSON.parse(fs.readFileSync(path.join(__dirname, 'lockup.json'), 'utf8'));
-const C = { Goud_Referentie: '#EDBD76', Goud: '#D6B583', Chocolade: '#2A1A12', Zwart: '#000000', Wit: '#FFFFFF' };
+// Goud: the chosen gold (calmer and deeper than the reference, so it reads as gold and not yellow)
+const C = { Goud: '#C9A063', Chocolade: '#2A1A12', Zwart: '#000000', Wit: '#FFFFFF' };
+const VOORBEELD = '#EDBD76';   // the lettering colour measured in the reference
 const BG = '#29170D';     // background of the reference image
 const TOREN = '#DBA667';  // the tower with flower in the reference is a darker gold than the lettering
 const K = 2;              // 2 units per reference pixel: the square is 2508 x 2508
@@ -40,7 +42,10 @@ ${p(...items[6])}
 }
 const files = [];
 const w = (f, s) => { fs.writeFileSync(path.join(OUT, f), s); files.push(f); };
-w('RAWZA_Logo_Exact_Goud_Op_Chocolade_Vierkant.svg', svg(C.Goud_Referentie, BG, false, TOREN));
-w('RAWZA_Logo_Exact_Goud_Op_Chocolade.svg', svg(C.Goud_Referentie, BG, true, TOREN));
-for (const [k, col] of Object.entries(C)) w(`RAWZA_Logo_Exact_${k}.svg`, svg(col, null, true, k === 'Goud_Referentie' ? TOREN : col));
+w('RAWZA_Logo_Exact_Goud_Op_Chocolade_Vierkant.svg', svg(C.Goud, BG, false));
+w('RAWZA_Logo_Exact_Goud_Op_Chocolade.svg', svg(C.Goud, BG, true));
+for (const [k, col] of Object.entries(C)) w(`RAWZA_Logo_Exact_${k}.svg`, svg(col, null, true));
+// the exact colours of the reference, for comparison
+w('RAWZA_Logo_Exact_Voorbeeldkleuren_Op_Chocolade_Vierkant.svg', svg(VOORBEELD, BG, false, TOREN));
+w('RAWZA_Logo_Exact_Voorbeeldkleuren.svg', svg(VOORBEELD, null, true, TOREN));
 console.log(files.join('\n'));
